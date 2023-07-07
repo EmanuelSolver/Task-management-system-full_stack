@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { Context } from '../context/userContext/context';
+import { Link } from 'react-router-dom';
 
 function Login() {
   const { dispatch } = useContext(Context);
@@ -64,7 +65,7 @@ function Login() {
             </div>
 
             <div>
-              <p>Forgot password? click here</p>
+              <p>Forgot password? <Link to="/updatePassword" > click here </Link></p>
             </div>
 
             <button type="submit">Login</button>

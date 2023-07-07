@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
+import '../stylingFiles/Home.css'
 
 //icons
-import { IoDiamondOutline } from "react-icons/io";
+import { GrDiamond } from "react-icons/gr";
 
 function Header() {
   return (
@@ -9,7 +10,7 @@ function Header() {
             <nav className='navbar'>
               <div className='navbar-container'>
                 <Link to="/" className='navbar-logo'>
-                  <IoDiamondOutline /> TManager 
+                  <GrDiamond /> TManager 
                 </Link>
             
               </div>

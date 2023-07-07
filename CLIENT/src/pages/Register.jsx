@@ -88,13 +88,13 @@ function Register() {
             </div> 
 
             <div>
-                <label htmlFor="">Set Password:</label>
+                <label htmlFor="">Set Password:</label><br />
                 <input type="password"{...register("password")}/>
                 <p>{errors.password?.message}</p>
             </div>
 
             <div>
-                <label htmlFor="">Confirm Password:</label>
+                <label htmlFor="">Confirm Password:</label><br />
                 <input type="password" {...register("confirmPassword")}/>
                 <p>{errors.confirmPassword?.message}</p>
             </div>
