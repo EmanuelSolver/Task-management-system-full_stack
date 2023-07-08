@@ -1,0 +1,9 @@
+CREATE DATABASE TManagerDb;
+
+CREATE TABLE users (
+    Id INT IDENTITY (1, 1),
+    UserName VARCHAR (50) NOT NULL,
+	Email VARCHAR (255) NOT NULL,
+    Password VARCHAR (255) NOT NULL,
+    PRIMARY KEY(Id)
+);
