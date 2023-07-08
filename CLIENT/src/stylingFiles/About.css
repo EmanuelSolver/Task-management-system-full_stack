@@ -1,0 +1,13 @@
+.about-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: aliceblue;
+    line-height: 2;
+    gap: 20%;
+    margin-top: 1%;
+}
+.about{
+    width: 45%;
+    margin-left: 10%;
+}

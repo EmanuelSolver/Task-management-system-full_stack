@@ -1,0 +1,42 @@
+.simple-form{
+    width: 50%;
+    border-radius: 7%;
+    margin-left: 25%;
+    margin-top: 5%;
+    background-color: rgba(242, 242, 247, 0.8);
+    font-family: cursive;
+  
+}
+input, label, p{
+    border: none;
+    border-radius: 10px;
+    margin-left: 25%;
+    width: 50%;
+    
+}
+label{
+    font-weight: 700;
+    
+}
+span{
+    color: brown;
+    margin-left: 25%;
+}
+input{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    height: 30px;
+}
+h2{
+    text-align: center;
+   
+}
+.btn-login{
+    border-radius: 10px;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    margin-left: 40%;
+    margin-bottom: 2%;
+    color: aliceblue;
+    font-weight: 700;
+    background-color: rgb(110, 19, 185);
+}

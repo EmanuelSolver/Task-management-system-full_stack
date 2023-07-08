@@ -19,7 +19,7 @@ function UpdatePassword() {
             .oneOf([yup.ref("password"), null], "Passwords Don't match"),
 
         username: yup.string().required(),
-        email: yup.email().required(),
+        email: yup.string().required(),
       
     })
 
@@ -76,7 +76,7 @@ function UpdatePassword() {
               <input type="password" {...register("confirmPassword")}/>
               <p>{errors.confirmPassword?.message}</p>
 
-          <button type='submit'>Update</button>
+          <button type='submit' className='btn-login'>Update</button>
 
           
           <ToastContainer

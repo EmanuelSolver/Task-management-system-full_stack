@@ -40,3 +40,17 @@
 .read-the-docs {
   color: #888;
 } */
+
+body{
+  background-color: rgb(54, 54, 240);
+}
+.main-output{
+  background: url('department.jpg');
+  background-size: cover;
+  border-radius: 3%;
+  width: 70%;
+  margin-left: 15%;
+  height: 90vh;
+  margin-top: 5vh;
+  padding: 20px;
+}

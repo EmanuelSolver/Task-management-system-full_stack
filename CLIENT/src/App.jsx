@@ -4,14 +4,13 @@ import Header from './components/Header'
 import About from './pages/About'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import UpdatePassword from './pages/UpdatePassword'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
 function App() {
 
   return (
-    <>
+    <div className='main-output'>
       <BrowserRouter>
           <Header />
 
@@ -20,11 +19,10 @@ function App() {
             <Route path='/about' element={<About />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Register />} />
-            
           </Routes>
-          <UpdatePassword />
+          
       </BrowserRouter>
-    </>
+    </div>
   )
 }
 

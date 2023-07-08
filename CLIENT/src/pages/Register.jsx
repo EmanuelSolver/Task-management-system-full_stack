@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router-dom'
 import axios  from 'axios';
 import { apiDomain } from '../utils/utils'
 import { useForm } from "react-hook-form";
-
+import '../stylingFiles/Login.css'
 
 function Register() {
     const navigate = useNavigate()
 
         //create a schema to validate input fields before submission
         const schema = yup.object().shape({
-            userName: yup.string().required('Please, add your userName'),
+            username: yup.string().required('Please, add your userName'),
             email: yup.string().email().required(),
             password: yup.string().matches(
                 /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{4,}$/
@@ -77,30 +77,30 @@ function Register() {
             
             <div>
               <label htmlFor="name">User Name</label> <br />
-              <input type="text" id="name" placeholder="your username" {...register("username")}/>
-              <p>{errors.username?.message}</p> 
+              <input type="text" id="name" placeholder="your username" {...register("username")}/> <br />
+              <span>{errors.username?.message}</span> 
             </div>
 
             <div>
               <label htmlFor="email">Email:</label> <br />
-                <input type="email" id="email" placeholder='e.g. yourname@mail.com' {...register("email")}/>
-                <p>{errors.email?.message}</p>
+                <input type="email" id="email" placeholder='e.g. yourname@mail.com' {...register("email")}/> <br />
+                <span>{errors.email?.message}</span>
             </div> 
 
             <div>
                 <label htmlFor="">Set Password:</label><br />
-                <input type="password"{...register("password")}/>
-                <p>{errors.password?.message}</p>
+                <input type="password"{...register("password")}/> <br />
+              <span>{errors.password?.message}</span>
             </div>
 
             <div>
                 <label htmlFor="">Confirm Password:</label><br />
-                <input type="password" {...register("confirmPassword")}/>
-                <p>{errors.confirmPassword?.message}</p>
+                <input type="password" {...register("confirmPassword")}/> <br />
+              <span>{errors.confirmPassword?.message}</span>
             </div>
      
 
-            <button type="submit" >Sign up</button>
+            <button type="submit" className="btn-login">Sign up</button>
       
             <ToastContainer
               position="top-center"
