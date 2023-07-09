@@ -4,6 +4,9 @@ import Header from './components/Header'
 import About from './pages/About'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Dashboard from './pages/Dashboard'
+import NotFound from './pages/NotFound'
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
@@ -18,7 +21,9 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<Register />} />
+            <Route path='/signUp' element={<Register />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           
       </BrowserRouter>
