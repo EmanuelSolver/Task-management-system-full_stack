@@ -2,21 +2,21 @@ import { createContext, useEffect, useReducer } from "react";
 import Reducer from './Reducer'
 
 const INITIAL_STATE ={
-    user: JSON.parse(localStorage.getItem('user')) || null,
+    navigator: JSON.parse(localStorage.getItem("navigator")) || "home",
 }
 
 export const Context = createContext(INITIAL_STATE);
 
-export const UserProvider = ({ children }) => {
+export const NavigatorContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(Reducer, INITIAL_STATE);
 
     useEffect(()=>{
 
-        localStorage.setItem('user', JSON.stringify(state.user))
-    }, [state.user])
+        localStorage.setItem('navigator', JSON.stringify(state.navigator));
+    }, [state.navigator]);
     
     return(
-        <Context.Provider value={({ user: state.user, dispatch})}>
+        <Context.Provider value={({ navigator: state.navigator, dispatch})}>
             { children }
         </Context.Provider>
     )
