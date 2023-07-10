@@ -34,11 +34,11 @@ function Register() {
             //send data to the database via the local API using axios
     const dataToServer = (data) => {
   
-        axios.post(`${apiDomain}/signup`, data)
+        axios.post(`${apiDomain}/signUp`, data)
             .then((response) =>{
             response.data.message && toast.success(response.data.message, {
               position: "top-right",
-              autoClose: 3000,
+              autoClose: 5000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
@@ -50,7 +50,7 @@ function Register() {
   
             setTimeout(() => {
               navigate("/login")
-          }, 3000);
+          }, 5000);
             
           })
           .catch(({response}) =>{

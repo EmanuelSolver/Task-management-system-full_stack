@@ -4,9 +4,9 @@ import MainNav from '../components/dashboardComponents/MainNav'
 function Dashboard() {
   return (
     <div className="dashboard">
-       <SideNav />
+      <SideNav />
 
-        <MainNav />
+      <MainNav />
     </div>
   )
 }

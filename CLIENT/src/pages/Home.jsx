@@ -12,7 +12,7 @@ function Home() {
            
             <div className="content">
                 <h3>Dont be caught up by Deadlines, Manage your Tasks Efficiently with TManager</h3>
-                <p>Sign up with us and we will be glad to have you on board</p>
+                <h5>Sign up with us and we will be glad to have you on board</h5>
                 <Link to="/signup" className="button"> Try for free <RiArrowRightDoubleLine/></Link> 
             </div> 
 
@@ -20,12 +20,12 @@ function Home() {
               <div className="left-circle"> <BsPersonCircle /> </div> 
                 <div className="left-description1"> 
                 <h3>500+</h3> 
-                <p>Active users of our system</p>
+                <h4>Active users of our system</h4>
                 </div>
               <div className="right-circle"> <MdOutlineVerifiedUser/></div>
               <div className="right-description2"> 
                 <h3>©️2023</h3>
-                <p>Copyright</p>
+                <h4>Copyright</h4>
               </div>
 
           </div>

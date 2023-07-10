@@ -14,7 +14,7 @@ const routes = (app) => {
     //     .delete(deleteTodo);
 
     //auth routes
-    app.route('/register')
+    app.route('/signUp')
         .post(register);
 
     app.route('/login')

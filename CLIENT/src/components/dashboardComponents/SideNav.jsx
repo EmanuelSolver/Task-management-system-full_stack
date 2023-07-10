@@ -1,9 +1,12 @@
-import '../stylingFiles/sideNav.css'
-import { CgProfile } from 'react-icons/cg'
-import { FaBookReader } from 'react-icons/fa'
-import { FaMoneyCheckAlt } from 'react-icons/fa'
-import { GrUpdate } from 'react-icons/gr'
-import { Context } from '../context/studentContext/context'
+import '../../stylingFiles/sideNav.css'
+import { ImHome } from 'react-icons/im'
+import { GoGraph } from 'react-icons/go'
+import { LuCalendarDays } from 'react-icons/lu'
+import { MdOutlineNotificationImportant } from 'react-icons/md'
+import {PiProjectorScreenFill } from 'react-icons/pi'
+import { FiSettings } from 'react-icons/fi'
+import { AiOutlinePoweroff } from 'react-icons/ai'
+import { Context } from '../../context/navigationContext/Context'
 import { useContext } from 'react'
 
 export function SideNav() {
@@ -17,9 +20,17 @@ export function SideNav() {
 
         dispatch({type: 'NOTIFICATIONS', payload: 'notifications'})
     }
+    const handleProjects = () =>{
+
+        dispatch({type: 'PROJECTS', payload: 'projects'})
+    }
     const handleAnalytics = () =>{
 
         dispatch({type: 'ANALYTICS', payload: 'analytics'})
+    }
+    const handleCalendar = () =>{
+        dispatch({type: 'CALENDAR', payload: 'calendar'})
+
     }
     const handleSettings = () =>{
 
@@ -32,16 +43,15 @@ export function SideNav() {
     
   return (
     <div className="sidenav">
+      
         <div className="sidenav-wrapper">
-            <div className="sidenav-title" onClick={handleHome}><CgProfile/> Home</div>
-        </div>
-        
-        <div className="sidenav-wrapper">
-            <div className="sidenav-item" onClick={handleNotifications}><FaMoneyCheckAlt/> Notifications</div>
-            <div className="sidenav-item" onClick={handleAnalytics}><FaBookReader/> Analytics</div>
-            <div className="sidenav-item" onClick={handleSettings}><GrUpdate/> Settings</div>
-            <div className="sidenav-item" onClick={handleLogout}><GrUpdate/> Logout</div>
-
+            <div className="sidenav-item" onClick={handleHome}><ImHome/> Home</div>
+            <div className="sidenav-item" onClick={handleNotifications}><MdOutlineNotificationImportant/> Notifications</div>
+            <div className="sidenav-item" onClick={handleProjects}><PiProjectorScreenFill /> Projects</div>
+            <div className="sidenav-item" onClick={handleCalendar}><LuCalendarDays/> Calendar</div>
+            <div className="sidenav-item" onClick={handleAnalytics}><GoGraph/> Analytics</div>
+            <div className="sidenav-item" onClick={handleSettings}><FiSettings/> Settings</div>
+            <div className="sidenav-item" onClick={handleLogout}><AiOutlinePoweroff/> Logout</div>
 
         </div>
     
