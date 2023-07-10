@@ -1,3 +1,4 @@
+import Header1 from "./Header1"
 import Home1 from "./Home1"
 import Analytics from "./Analytics"
 import Notifications from "./Notifications"
@@ -11,6 +12,7 @@ function MainNav() {
   return (
     <div>
         <h1>Task Dashboard</h1>
+        <Header1 />
         {
             navigator == 'home' ? (
                 <div className='mainnav-wrapper'>
