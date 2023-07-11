@@ -1,0 +1,10 @@
+.dashboard{
+    display: flex;
+    width: 150%;
+    z-index: 1;
+    background-color: white;
+    margin-left: -24.5%;
+    margin-top: -5.5%;
+    height: 120%;
+    position: relative;
+}

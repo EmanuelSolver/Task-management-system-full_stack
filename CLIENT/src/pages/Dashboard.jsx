@@ -1,3 +1,4 @@
+import '../stylingFiles/Dashboard.css'
 import SideNav from '../components/dashboardComponents/SideNav'
 import MainNav from '../components/dashboardComponents/MainNav'
 

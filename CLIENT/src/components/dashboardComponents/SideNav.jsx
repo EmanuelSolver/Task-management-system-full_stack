@@ -6,6 +6,8 @@ import { MdOutlineNotificationImportant } from 'react-icons/md'
 import {PiProjectorScreenFill } from 'react-icons/pi'
 import { FiSettings } from 'react-icons/fi'
 import { AiOutlinePoweroff } from 'react-icons/ai'
+import { GrDiamond } from "react-icons/gr";
+
 import { Context } from '../../context/navigationContext/Context'
 import { useContext } from 'react'
 
@@ -43,7 +45,7 @@ export function SideNav() {
     
   return (
     <div className="sidenav">
-      
+        <div className="logo"><GrDiamond /> TManager </div>
         <div className="sidenav-wrapper">
             <div className="sidenav-item" onClick={handleHome}><ImHome/> Home</div>
             <div className="sidenav-item" onClick={handleNotifications}><MdOutlineNotificationImportant/> Notifications</div>
