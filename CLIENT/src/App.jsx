@@ -8,7 +8,7 @@ import Dashboard from './pages/Dashboard'
 import NotFound from './pages/NotFound'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useContext } from 'react'
-import { Context } from './context/userContext/Context'
+import { Context } from './context/userContext/userContext'
 
 function App() {
   const { user } = useContext(Context)

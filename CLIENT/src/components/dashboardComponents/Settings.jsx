@@ -1,7 +1,9 @@
+import UpdatePassword from '../../pages/UpdatePassword'
 
 function Settings() {
   return (
     <div>
+      <UpdatePassword/>
       
     </div>
   )

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import '../stylingFiles/Header.css'
 import { useContext } from 'react'
-import { Context } from '../context/userContext/Context'
+import { Context } from '../context/userContext/userContext'
 //icons
 import { GrDiamond } from "react-icons/gr";
 

@@ -7,12 +7,12 @@ import {PiProjectorScreenFill } from 'react-icons/pi'
 import { FiSettings } from 'react-icons/fi'
 import { AiOutlinePoweroff } from 'react-icons/ai'
 import { GrDiamond } from "react-icons/gr";
-
 import { Context } from '../../context/navigationContext/Context'
 import { useContext } from 'react'
 
 export function SideNav() {
     const { dispatch } = useContext(Context)
+    
 
     const handleHome = () =>{
 
@@ -41,6 +41,7 @@ export function SideNav() {
     
     const handleLogout = () =>{
         //logout dispatch here
+        
     }
     
   return (
@@ -51,10 +52,9 @@ export function SideNav() {
             <div className="sidenav-item" onClick={handleNotifications}><MdOutlineNotificationImportant/> Notifications</div>
             <div className="sidenav-item" onClick={handleProjects}><PiProjectorScreenFill /> Projects</div>
             <div className="sidenav-item" onClick={handleCalendar}><LuCalendarDays/> Calendar</div>
-            <div className="sidenav-item" onClick={handleAnalytics}><GoGraph/> Analytics</div>
+            <div className="sidenav-item" onClick={handleAnalytics}><GoGraph/> Analytics</div> <br /><br />
             <div className="sidenav-item" onClick={handleSettings}><FiSettings/> Settings</div>
             <div className="sidenav-item" onClick={handleLogout}><AiOutlinePoweroff/> Logout</div>
-
         </div>
     
     </div>

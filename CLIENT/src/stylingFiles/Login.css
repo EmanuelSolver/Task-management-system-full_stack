@@ -7,7 +7,7 @@
     font-family: cursive;
   
 }
-input, label, p{
+input, select, label, p{
     border: none;
     border-radius: 10px;
     margin-left: 25%;
@@ -22,7 +22,7 @@ span{
     color: brown;
     margin-left: 25%;
 }
-input{
+input, select{
     margin-top: 10px;
     margin-bottom: 15px;
     height: 30px;
