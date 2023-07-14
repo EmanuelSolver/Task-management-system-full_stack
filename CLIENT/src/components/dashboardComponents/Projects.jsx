@@ -46,7 +46,7 @@ function Projects() {
         taskName: yup.string().required('Type task Name'),
         end: yup.string().required(),
         start: yup.string().required(),
-        member: yup.string().required(),
+        member: yup.string().required('select member'),
         
     });
 

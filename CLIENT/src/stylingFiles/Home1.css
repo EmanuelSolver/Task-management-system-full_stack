@@ -38,8 +38,13 @@
 }
 
 .card #dueDate{
-    color: rgb(226, 43, 211);
+    color: brown;
 }
 .card #complete{
     color: green;
+}
+.card #delete{
+    color: brown;
+    margin-left: 20px;
+    cursor: pointer;
 }

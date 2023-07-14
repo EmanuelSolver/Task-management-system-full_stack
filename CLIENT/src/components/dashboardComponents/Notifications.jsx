@@ -33,10 +33,13 @@ function Notifications() {
           {
            task && task.map((item, index) => (
               <>
-                <div className="card" key={index}>
-                  <h5>Task Name: { item.TaskName}</h5>
-                  <h5>Start Date: { moment(item.StartDate).utc().format('DD/MM/YYYY') }</h5>
-                </div>
+              {
+                 moment(item.StartDate).isAfter(new Date().toLocaleDateString) &&
+                  <div className="card" key={index}>
+                    <h5>Task Name: { item.TaskName}</h5>
+                    <h5>Start Date: { moment(item.StartDate).utc().format('DD/MM/YYYY') }</h5>
+                  </div>
+              }
               </> 
           ))}
           
