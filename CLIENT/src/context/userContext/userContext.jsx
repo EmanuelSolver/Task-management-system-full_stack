@@ -5,7 +5,7 @@ const INITIAL_STATE ={
     user: JSON.parse(localStorage.getItem('user')) || null,
 }
 
-export const Context = createContext(INITIAL_STATE);
+export const ContextUser = createContext(INITIAL_STATE);
 
 export const UserProvider = ({ children }) => {
     const [state, dispatch] = useReducer(Reducer, INITIAL_STATE);
@@ -16,8 +16,8 @@ export const UserProvider = ({ children }) => {
     }, [state.user])
     
     return(
-        <Context.Provider value={({ user: state.user, dispatch})}>
+        <ContextUser.Provider value={({ user: state.user, dispatch})}>
             { children }
-        </Context.Provider>
+        </ContextUser.Provider>
     )
 };

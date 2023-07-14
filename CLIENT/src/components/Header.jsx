@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 import '../stylingFiles/Header.css'
 import { useContext } from 'react'
-import { Context } from '../context/userContext/userContext'
+import { ContextUser } from '../context/userContext/userContext'
 //icons
 import { GrDiamond } from "react-icons/gr";
 
 function Header() {
-  const { user } = useContext(Context)
+  const { user } = useContext(ContextUser)
 
   return (
     <div>

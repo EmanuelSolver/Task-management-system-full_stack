@@ -8,11 +8,11 @@ import axios  from 'axios';
 import { apiDomain } from '../../utils/utils';
 import { useForm } from "react-hook-form";
 import { useContext } from 'react';
-import { Context } from '../../context/userContext/userContext';
+import { ContextUser } from '../../context/userContext/userContext';
 import moment from 'moment';
 
 function Projects() {
-    const { user } = useContext(Context)
+    const { user } = useContext(ContextUser)
      //get projects and users from the database
      const [members, setMembers] = useState([])
      const [project, setProject] = useState([])

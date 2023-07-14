@@ -3,13 +3,13 @@ import { apiDomain } from '../../utils/utils'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useContext } from 'react';
-import { Context } from '../../context/userContext/userContext';
+import { ContextUser } from '../../context/userContext/userContext';
 import moment from 'moment';
 
 
 function Notifications() {
 
-  const { user } = useContext(Context);
+  const { user } = useContext(ContextUser);
 
   const [task, setTask] = useState([])
 

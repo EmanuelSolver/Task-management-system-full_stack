@@ -4,17 +4,12 @@ import { apiDomain } from '../../utils/utils'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useContext } from 'react';
-import { Context } from '../../context/userContext/userContext';
+import { ContextUser } from '../../context/userContext/userContext';
 import moment from 'moment';
 
 function Home1() {
-    //calculation of days
-    const newStartDate= new Date().toLocaleString()
-    const newEndDate = '2023-08-09'
-    let result = moment(newEndDate).diff(newStartDate,'days')
-    console.log(result)
-
-  const { user } = useContext(Context);
+   
+  const { user } = useContext(ContextUser);
 
   const [task, setTask] = useState([])
 

@@ -7,11 +7,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { Context } from '../context/userContext/userContext';
+import { ContextUser } from '../context/userContext/userContext';
 import '../stylingFiles/Login.css'
 
 function Login() {
-  const { dispatch } = useContext(Context);
+  const { dispatch } = useContext(ContextUser);
 
   const navigate = useNavigate()
 

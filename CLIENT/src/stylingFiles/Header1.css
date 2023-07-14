@@ -38,3 +38,9 @@
     display: flex;
     justify-content: center;
 }
+.logout{
+    color: brown;
+    position: relative;
+    left: -4rem;
+    cursor: pointer;
+}
