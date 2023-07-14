@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgb(102, 45, 155);
+    background-color: rgba(50, 40, 187, 0.096);
     width: 94%;
     padding: 10px;
     margin-left: 3%;
@@ -21,14 +21,12 @@
     align-items: center;
     text-decoration: none;
     border-radius: 5px;
-    color: #fff;
-    background-color: rgb(72, 35, 107);
+    color: #3e0475;
     padding: 0.35rem 1rem 0.35rem 1rem;
-
+    font-size: 1.5rem;
     font-weight: bold;
   }
-  
-  
+   
   .nav-item {
     display: flex;
     align-items: center;
@@ -38,27 +36,18 @@
   
   .nav-links {
     text-decoration: none;
-    color: #f8f4f4;
-    
-   
+    color: rgb(244, 243, 245);
+    font-size: larger;
   }
   .signUp-link{
-    background-color: #f8f4f4;
+    background-color: rgba(255, 255, 255, 0.096);
     text-decoration: none;
-    color: rgb(37, 3, 68);
+    color: rgb(244, 241, 250);
     font-size: larger;
     font-weight: 700;
     border-radius: 5px;
-    padding: 2px;
-    
+    padding: 5px; 
   }
   
-  .nav-item button {
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(72, 35, 107);
-    cursor: pointer;
-    text-decoration: none;
-    padding: 0.35rem 1rem 0.35rem 1rem;
-  }
+
   

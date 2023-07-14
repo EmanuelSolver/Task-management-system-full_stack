@@ -3,7 +3,7 @@
     border-radius: 7%;
     margin-left: 25%;
     margin-top: 5%;
-    background-color: rgba(242, 242, 247, 0.8);
+    background-color: rgba(229, 229, 241, 0.507);
     font-family: cursive;
   
 }
@@ -34,9 +34,9 @@ h2{
 .btn-login{
     border-radius: 10px;
     padding: 0.5rem 1rem 0.5rem 1rem;
-    margin-left: 40%;
+    margin-left: 45%;
     margin-bottom: 2%;
     color: aliceblue;
     font-weight: 700;
-    background-color: rgb(110, 19, 185);
+    background-color: rgb(111, 5, 209);
 }

@@ -1,17 +1,20 @@
-// import { getTodos, getTodo, createTodo, updateTodo, deleteTodo } from '../controllers/taskController.js';
+import {getTasks, getProjects, createTask} from '../controllers/taskController.js';
 import { login, register, loginRequired } from '../controllers/authControllers.js';
-
+import { getUsers } from '../controllers/userController.js';
 
 const routes = (app) => {
     //todo routes
-    // app.route('/todos')
-    //     .get(loginRequired, getTodos)
-    //     .post(loginRequired, createTodo);
+    app.route('/tasks')
+        .get(loginRequired, getTasks)
+        .post(loginRequired, createTask)
+        //.delete(loginRequired, deleteTask)
 
-    // app.route('/todo/:id')
-    //     .put(updateTodo)
-    //     .get(getTodo)
-    //     .delete(deleteTodo);
+    app.route('/users')
+    //     .put(updatePassword);
+        .get(loginRequired, getUsers)
+
+    app.route('/projects')
+        .get(loginRequired, getProjects)
 
     //auth routes
     app.route('/signUp')

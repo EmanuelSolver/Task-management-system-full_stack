@@ -11,9 +11,14 @@ function Home() {
           <h1 className="heading">Welcome Here</h1>
            
             <div className="content">
-                <h3>Dont be caught up by Deadlines, Manage your Tasks Efficiently with TManager</h3>
-                <h5>Sign up with us and we will be glad to have you on board</h5>
-                <Link to="/signup" className="button"> Try for free <RiArrowRightDoubleLine/></Link> 
+                <div className='left'>
+                  <h3>Dont be caught up by Deadlines, Manage your Tasks Efficiently with TManager</h3>
+                  <h5>Sign up with us and we will be glad to have you on board</h5>
+                  <Link to="/signup" className="button"> Try for free <RiArrowRightDoubleLine/></Link> 
+                </div>
+                <div className='right'>
+                  <img src='../../public/logo.png' alt='logo'/>
+                </div>
             </div> 
 
           <div className="footer">

@@ -7,7 +7,7 @@
 .logo{
     margin-top: 10%;
     margin-left: 15%;
-    color: rgb(187, 7, 223);
+    color: rgb(111, 5, 209);
     font-weight: 900;
     font-size: x-large;
 }
@@ -21,6 +21,7 @@
 
 .sidenav-item{
     font-size: large;
+    padding-left: 2rem;
 
 }
 .sidenav-item:hover{

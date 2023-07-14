@@ -22,9 +22,9 @@ function Header() {
 
             
               <div className='nav-item'>
-                  <button><Link to="/" className='nav-links' > Home </Link></button>
-                  <button><Link to="/about" className='nav-links' > About </Link></button>
-                  <button><Link to="/login" className='nav-links'> Login </Link></button>
+                  <Link to="/" className='nav-links' > Home </Link>
+                  <Link to="/about" className='nav-links' > About </Link>
+                  <Link to="/login" className='nav-links'> Login </Link>
                   <Link to="/signup" className='signUp-link' >Sign Up </Link>
                     
               </div>      

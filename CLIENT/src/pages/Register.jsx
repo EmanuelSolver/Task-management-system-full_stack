@@ -46,7 +46,6 @@ function Register() {
               progress: undefined,
               theme: "light",
               });
-            console.log(response)
   
             setTimeout(() => {
               navigate("/login")

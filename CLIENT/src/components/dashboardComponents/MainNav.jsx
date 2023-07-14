@@ -1,6 +1,7 @@
 import Header1 from "./Header1"
 import Home1 from "./Home1"
 import Analytics from "./Analytics"
+import Calendar from "./Calendar"
 import Notifications from "./Notifications"
 import Projects from "./Projects"
 import Settings from "./Settings"
@@ -27,6 +28,10 @@ function MainNav() {
             ): navigator == 'projects' ? (
                 <div className='mainnav-wrapper'>
                     <Projects />
+                </div>
+            ): navigator == 'calendar' ? (
+                <div className='mainnav-wrapper'>
+                    <Calendar />
                 </div>
             ): navigator == 'analytics' ? (
                 <div className='mainnav-wrapper'>

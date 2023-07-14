@@ -2,27 +2,51 @@ import '../../stylingFiles/Login.css'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {toast, ToastContainer} from 'react-toastify';
+import { useState, useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom'
 import axios  from 'axios';
 import { apiDomain } from '../../utils/utils';
 import { useForm } from "react-hook-form";
+import { useContext } from 'react';
+import { Context } from '../../context/userContext/userContext';
+import moment from 'moment';
 
 function Projects() {
-    const navigate = useNavigate()
+    const { user } = useContext(Context)
+     //get projects and users from the database
+     const [members, setMembers] = useState([])
+     const [project, setProject] = useState([])
+     const [start, setStart] = useState([])
+
+     const getMembers = async () => {
+         const response = await axios.get(`${apiDomain}/users`,{
+          headers: { 'Authorization': `${user.token}` },
+      })
+         setMembers(response.data)
+     }
+
+     //get projects
+     const getProjects = async () => {
+       const res = await axios.get(`${apiDomain}/projects`,{
+        headers: { 'Authorization': `${user.token}` },
+    })
+       setProject(res.data)
+   }
+
+   useEffect(() =>{
+     
+       getMembers()
+       getProjects()
+   }, [])
+
 
     //create a schema to validate input fields before submission
     const schema = yup.object().shape({
-        username: yup.string().required('Please, add your userName'),
-        email: yup.string().email().required(),
-        password: yup.string().matches(
-            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{4,}$/
-            ,
-            'password must contain at least 4 characters,uppercase,lowercase,number & Alphanumerics'
-          ).required("Password is required"),
-          confirmPassword: yup
-            .string()
-            .oneOf([yup.ref("password"), null], "Passwords Don't match"),
+        project: yup.string().required('select a project'),
+        taskName: yup.string().required('Type task Name'),
+        end: yup.string().required(),
+        start: yup.string().required(),
+        member: yup.string().required(),
         
     });
 
@@ -34,7 +58,9 @@ function Projects() {
         //send data to the database via the local API using axios
 const dataToServer = (data) => {
 
-    axios.post(`${apiDomain}/addTask`, data)
+    axios.post(`${apiDomain}/tasks`, data,{
+      headers: { 'Authorization': `${user.token}` },
+  })
         .then((response) =>{
         response.data.message && toast.success(response.data.message, {
           position: "top-right",
@@ -46,11 +72,6 @@ const dataToServer = (data) => {
           progress: undefined,
           theme: "light",
           });
-        console.log(response)
-
-        setTimeout(() => {
-          navigate("/login")
-      }, 5000);
         
       })
       .catch(({response}) =>{
@@ -68,42 +89,75 @@ const dataToServer = (data) => {
       })
   }; 
 
+  const checkDate = (e) => {
+     //calculation of days
+     let end = e.target.value
+     let result = moment(end).diff(start,'days')
 
+     result < 0 && toast.error('Closing Date must be ahead of Start Date', {
+       position: "top-center",
+       autoClose: 5000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       draggable: true,
+       progress: undefined,
+       theme: "colored",
+       })
+   }
+     
+  
   return (
     <form className="simple-form" onSubmit={handleSubmit(dataToServer)}>
-            {/* <div>
-              <h2><i>Schedule a Task</i> </h2>
-            </div> */}
-            
+                
             <div>
                 <label htmlFor="name">Project</label> <br />
-                <select name="" id="">
-                    </select>              <span>{errors.username?.message}</span> 
+                <select name="" id="" {...register("project")}>
+                    <option > - select - </option>
+                    {
+                    project && project.map((item, index) => (
+                        <option key={index} value={index + 1}> {item.ProjectName} </option>
+                    ))}
+                </select>              
+                <span>{errors.project?.message}</span> 
             </div>
 
             <div>
-              <label htmlFor="email">Task Name</label> <br />
-                <input type="email" id="email" placeholder='e.g. yourname@mail.com' {...register("email")}/> <br />
-                <span>{errors.email?.message}</span>
+              <label htmlFor="task">Task Name</label>
+                <input type="text" id="task" {...register("taskName")}/>
+                <span>{errors.taskName?.message}</span>
+            </div> 
+            <div>
+              <label htmlFor="task">Priority</label> 
+                <select name="" id="" {...register("priority")}>
+                  <option value="">-select-</option>
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
+                </select>
+                <span>{errors.priority?.message}</span>
             </div> 
 
             <div>
-                <label htmlFor="">Start Date</label><br />
-                <input type="date"{...register("start")}/> <br />
-              <span>{errors.start?.message}</span>
+                <label htmlFor="start">Start Date</label>
+                <input id='start' type="date"{...register("start")} onChange={e =>setStart(e.target.value)}/>              
+                <span>{errors.start?.message}</span>
             </div>
 
             <div>
                 <label htmlFor="">Close Date</label><br />
-                <input type="date" {...register("end")}/> <br />
+                <input type="date" {...register("end")} onChange={checkDate}/>
               <span>{errors.end?.message}</span>
             </div>
 
             <div>
-                <label htmlFor="">Assign Member</label><br />
+                <label htmlFor="">Assign Member</label>
                 <select name="" id="" {...register("member")}>
-                    <option value=""></option>
-                    <option value=""></option>
+                <option > - select - </option>
+                    {
+                    members && members.map((item, index) => (
+                        <option key={index} value={index + 1}> {item.UserName} </option>
+                    ))}
                 </select>
               <span>{errors.member?.message}</span>
             </div>

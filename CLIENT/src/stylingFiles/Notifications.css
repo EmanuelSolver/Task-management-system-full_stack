@@ -1,0 +1,43 @@
+.tasks{
+    display: flex;
+    justify-content: space-around;
+}
+.future, .overdue{
+    background-color: #e4e3e3;
+    border-radius: 12px;
+    margin-top: 1rem;
+    width: 35%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: scroll;
+
+}
+.title-btn{
+    background-color: rgb(111, 5, 209);
+    border-radius: 10px;
+    height: 2rem;
+    width: 75%;
+    color: aliceblue;
+    font-size: larger;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.card{
+    background-color: white;
+    border-radius: 20px;
+    width: 75%;
+    color: rgb(0, 0, 12);
+    margin-top: 10px;
+    font-family: cursive;
+}
+.card> h5{
+    margin-left:1.5rem;
+}
+
+.card #dueDate{
+    color: rgb(226, 43, 211);
+}
