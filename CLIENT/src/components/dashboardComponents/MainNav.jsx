@@ -1,7 +1,7 @@
 import Header1 from "./Header1"
 import Home1 from "./Home1"
 import Analytics from "./Analytics"
-import GetData from "./GetData"
+import Filter from "./Filter"
 import Notifications from "./Notifications"
 import Projects from "./Projects"
 import Settings from "./Settings"
@@ -29,9 +29,9 @@ function MainNav() {
                 <div className='mainnav-wrapper'>
                     <Projects />
                 </div>
-            ): navigator == 'calendar' ? (
+            ): navigator == 'filter' ? (
                 <div className='mainnav-wrapper'>
-                    <GetData />
+                    <Filter />
                 </div>
             ): navigator == 'analytics' ? (
                 <div className='mainnav-wrapper'>

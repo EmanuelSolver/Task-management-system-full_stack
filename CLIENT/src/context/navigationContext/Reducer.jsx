@@ -13,7 +13,7 @@ const Reducer = (state, action) => {
             return{
                 navigator: action.payload,
             }
-        case "CALENDAR":
+        case "FILTER":
             return{
                 navigator: action.payload,
             }

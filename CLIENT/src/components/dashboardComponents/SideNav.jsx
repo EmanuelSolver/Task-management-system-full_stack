@@ -29,8 +29,8 @@ export function SideNav() {
 
         dispatch({type: 'ANALYTICS', payload: 'analytics'})
     }
-    const handleCalendar = () =>{
-        dispatch({type: 'CALENDAR', payload: 'calendar'})
+    const handleFilter = () =>{
+        dispatch({type: 'FILTER', payload: 'filter'})
 
     }
     const handleSettings = () =>{
@@ -46,7 +46,7 @@ export function SideNav() {
             <div className="sidenav-item" onClick={handleHome}><ImHome/> Home</div>
             <div className="sidenav-item" onClick={handleNotifications}><MdOutlineNotificationImportant/> Notifications</div>
             <div className="sidenav-item" onClick={handleProjects}><PiProjectorScreenFill /> Projects</div>
-            <div className="sidenav-item" onClick={handleCalendar}><LuCalendarDays/> Calendar</div>
+            <div className="sidenav-item" onClick={handleFilter}><LuCalendarDays/> Filter Tasks</div>
             <div className="sidenav-item" onClick={handleAnalytics}><GoGraph/> Analytics</div>
             <div className="sidenav-item" onClick={handleSettings}><FiSettings/> Settings</div>
         </div>

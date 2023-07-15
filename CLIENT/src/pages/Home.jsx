@@ -8,11 +8,11 @@ function Home() {
   return (
     <div>
       <div className="container">
-          <h1 className="heading">Welcome Here</h1>
+          <h1 className="heading">Welcome to TManager</h1>
            
             <div className="content">
                 <div className='left'>
-                  <h3>Dont be caught up by Deadlines, Manage your Tasks Efficiently with TManager</h3>
+                  <h2>Dont be caught up by Deadlines, Manage your Tasks Efficiently with TManager</h2>
                   <h5>Sign up with us and we will be glad to have you on board</h5>
                   <Link to="/signup" className="button"> Try for free <RiArrowRightDoubleLine/></Link> 
                 </div>

@@ -1,8 +1,8 @@
 import '../../stylingFiles/Login.css'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {toast, ToastContainer} from 'react-toastify';
 import { useState, useEffect } from 'react';
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios  from 'axios';
 import { apiDomain } from '../../utils/utils';
@@ -60,8 +60,7 @@ const dataToServer = (data) => {
 
     axios.post(`${apiDomain}/tasks`, data,{
       headers: { 'Authorization': `${user.token}` },
-  })
-        .then((response) =>{
+  }).then((response) =>{
         response.data.message && toast.success(response.data.message, {
           position: "top-right",
           autoClose: 5000,

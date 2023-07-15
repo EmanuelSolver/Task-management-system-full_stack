@@ -1,0 +1,37 @@
+.filter{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.byPriority, .byProject{
+    display : flex;
+   align-items: center;
+    margin-left: 5%;
+    width: 90%;
+    height: 40vh;
+    overflow-x: scroll;
+    flex-direction: row;
+    background-color: #e4e3e3;
+    border-radius: 20px;
+    margin-top: 1rem;
+}
+.searchTitle{
+    background-color: rgb(111, 5, 209);
+    border-radius: 7px;
+    border-radius: 10px;
+    width: 25%;
+    color: aliceblue;
+    font-size: larger;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+.card{
+    background-color: white;
+    border-radius: 20px;
+    width: 25%;
+    color: rgb(0, 0, 12);
+    margin-top: 10px;
+    font-family: cursive;
+}

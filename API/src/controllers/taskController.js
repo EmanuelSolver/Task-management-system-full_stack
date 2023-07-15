@@ -50,8 +50,6 @@ export const getTasks = async (req, res) => {
   };
   
 
-
-
 export const deleteTask = async (req, res) => {
   const { id } = req.params;
 
@@ -102,5 +100,52 @@ export const getProjects = async (req, res) => {
 
 
 
+export const taskByPriority = async(req, res) =>{
+  const { priority } = req.params
 
+  let pool = await sql.connect(config.sql); // Establish a connection to the database
+  
+    try {
+      const result = await pool.request()
+      .input('value', sql.VarChar, priority)
+      .query(
+        "SELECT t.Id, t.TaskName, t.StartDate, t.CloseDate, p.ProjectName, p.ProjectManager FROM Tasks t JOIN Projects p ON t.ProjectId = p.Id WHERE Priority = @value"
+      ); // Query the tasks and projects tables
+  
+      if (result.recordset.length === 0) {
+        // Check if the result set is empty
+        res.status(404).json({ message: 'Record not found' });
+      } else {
+        res.status(200).json(result.recordset); // Return the result
+      }
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    } finally {
+      sql.close(); // Close the SQL connection
+    }
+}
 
+export const taskByProject = async(req, res) =>{
+  const { proj } = req.params
+
+  let pool = await sql.connect(config.sql); // Establish a connection to the database
+  
+    try {
+      const result = await pool.request()
+      .input('value', sql.Int, proj)
+      .query(
+        "SELECT t.Id, t.TaskName, t.StartDate, t.CloseDate, p.ProjectName, p.ProjectManager FROM Tasks t JOIN Projects p ON t.ProjectId = p.Id WHERE ProjectId = @value"
+      ); // Query the tasks and projects tables
+  
+      if (result.recordset.length === 0) {
+        // Check if the result set is empty
+        res.status(404).json({ message: 'Record not found' });
+      } else {
+        res.status(200).json(result.recordset); // Return the result
+      }
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    } finally {
+      sql.close(); // Close the SQL connection
+    }
+}

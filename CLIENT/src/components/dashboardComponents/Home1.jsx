@@ -12,7 +12,7 @@ function Home1() {
    
   const { user } = useContext(ContextUser);
 
-  const [task, setTask] = useState([])
+  const [task, setTask] = useState([{"ProjectName": null, "Id": 0, "ProjectManager": null, "TaskName": null, "StartDate": null, "CloseDate": null}])
 
   const getData = async () => {
     try {
@@ -20,6 +20,7 @@ function Home1() {
         headers: { 'Authorization': `${user.token}` }, 
       });
       setTask(res.data);
+
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -32,6 +33,7 @@ function Home1() {
         headers: { 'Authorization': `${user.token}` }, 
       });
       await getData(); // Fetch the updated data
+     
     } catch (error) {
       console.log(error);
     }
@@ -44,31 +46,28 @@ function Home1() {
 
 
 
-
   return (
     <div className='tasks'>
       <div className="scheduled">
-      <div className="title-btn">All Tasks</div>
+        <div className="title-btn">All Tasks</div>
 
-      {
-        task &&
-        task.map((item, index) => (
-          <div className="card" key={index}>
-            <h5>Project: {item.ProjectName}</h5>
-            <h5>Project Manager: {item.ProjectManager}</h5>
-            <h5>Task Name: {item.TaskName}</h5>
-            <h5>Start Date: {moment(item.StartDate).utc().format('DD/MM/YYYY')}</h5>
-            <h5>Close Date: {moment(item.CloseDate).utc().format('DD/MM/YYYY')}</h5>
-            <h4 id="delete" onClick={() => handleDelete(item.Id)}>
-              <AiFillDelete /> Discard
-            </h4>
-          </div>
-        ))
-      }
-
-          
-    
+        {
+          task &&
+          task.map((item, index) => (
+            <div className="card" key={index}>
+              <h5>Project: {item.ProjectName}</h5>
+              <h5>Project Manager: {item.ProjectManager}</h5>
+              <h5>Task Name: {item.TaskName}</h5>
+              <h5>Start Date: {moment(item.StartDate).utc().format('DD/MM/YYYY')}</h5>
+              <h5>Close Date: {moment(item.CloseDate).utc().format('DD/MM/YYYY')}</h5>
+              <h4 id="delete" onClick={() => handleDelete(item.Id)}>
+                <AiFillDelete /> Discard
+              </h4>
+            </div>
+          ))
+        }
       </div>
+
 
         {/* displays tasks in progress */}
       <div className="progress">
@@ -95,16 +94,15 @@ function Home1() {
        <div className="title-btn">Completed Tasks</div>
        {
            task && task.map((item, index) => (
-              <>
-          { 
-          ((moment(item.CloseDate).diff(new Date().toLocaleString(),'days')) <= 0) &&  
-          <div className="card" key={index}>
+          <>
+            { 
+              ((moment(item.CloseDate).diff(new Date().toLocaleString(),'days')) <= 0) &&  
+              <div className="card" key={index}>
                   <h5>Task Name: { item.TaskName}</h5>
                   <h5 id='complete'>Status: Completed <MdOutlineVerifiedUser/></h5> 
-                </div>
-          } 
-               
-              </> 
+              </div>
+            }    
+          </> 
           ))}
       </div>
     </div>

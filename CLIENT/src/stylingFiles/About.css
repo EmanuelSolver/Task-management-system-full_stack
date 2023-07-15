@@ -1,6 +1,5 @@
 .about-container{
     display: flex;
-    align-items: center;
     justify-content: space-around;
     line-height: 2.5;
     gap: 20%;
