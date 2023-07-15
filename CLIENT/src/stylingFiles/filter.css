@@ -4,8 +4,6 @@
     flex-direction: column;
 }
 .byPriority, .byProject{
-    display : flex;
-   align-items: center;
     margin-left: 5%;
     width: 90%;
     height: 40vh;
@@ -16,22 +14,40 @@
     margin-top: 1rem;
 }
 .searchTitle{
+    margin-top: 1rem;
     background-color: rgb(111, 5, 209);
     border-radius: 7px;
-    border-radius: 10px;
-    width: 25%;
-    color: aliceblue;
+    width: 20%;
+    color: white;
     font-size: larger;
-    display: flex;
-    align-items: center;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+   
+}
+.card-list{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    flex-wrap: wrap;
     justify-content: center;
-    margin-left: 10px;
 }
 .card{
     background-color: white;
     border-radius: 20px;
-    width: 25%;
     color: rgb(0, 0, 12);
-    margin-top: 10px;
     font-family: cursive;
+    box-shadow: 2px 4px 5px rgba(19, 3, 241, 0.89);
+
+}
+
+button{
+    color: white;
+    background-color: rgb(111, 5, 209);
+    border-radius: 0px 12px 12px 0px;
+    height: 2.5rem;
+    cursor: pointer;
+
+}
+select{
+    height: 2.5rem;
+    border-radius: 12px 0px 0px 12px;
 }

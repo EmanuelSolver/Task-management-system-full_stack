@@ -68,6 +68,8 @@ function Filter() {
           <option value="low">Low</option>
         </select>
         <button onClick={handlePriority}>Search</button>
+
+        <div className='card-list'>
         {
           priorityTask && priorityTask.map((item, index) => (
             <div className="card" key={index}>
@@ -79,9 +81,11 @@ function Filter() {
             </div>
           ))
         }
+        </div>
+       
       </div>
-      
-      <div className="searchTitle">Filter By project</div>
+
+      <div className="searchTitle">Filter By project Name</div>
       <div className="byProject">
           <select name="" id="" onChange={(e) => setProj(e.target.value)}>
               <option > - select - </option>
@@ -92,7 +96,8 @@ function Filter() {
           </select>
           <button onClick={handleProject}>Search</button>
 
-        {
+       <div className="card-list">
+       {
           projectTask && projectTask.map((item, index) => (
                <div className="card" key={index}>
                  <h5>Project: {item.ProjectName}</h5>
@@ -103,6 +108,7 @@ function Filter() {
                </div>
              ))
         }
+       </div>
       </div> 
   
     </div>

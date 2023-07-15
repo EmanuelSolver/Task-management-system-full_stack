@@ -4,9 +4,10 @@ import config from '../db/config.js'
 
 export const createTask = async (req, res) => {
     const { project, taskName, priority, start, end, member} = req.body;
-
+    
+    let pool = await sql.connect(config.sql);
     try {
-        let pool = await sql.connect(config.sql);
+        
             await pool.request()
                 .input('taskName', sql.VarChar, taskName)
                 .input('priority', sql.VarChar, priority)
