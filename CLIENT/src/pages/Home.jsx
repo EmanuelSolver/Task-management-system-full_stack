@@ -17,7 +17,7 @@ function Home() {
                   <Link to="/signup" className="button"> Try for free <RiArrowRightDoubleLine/></Link> 
                 </div>
                 <div className='right'>
-                  <img src='../../public/logo.png' alt='logo'/>
+                  <img src='/logo.png' alt='logo'/>
                 </div>
             </div> 
 

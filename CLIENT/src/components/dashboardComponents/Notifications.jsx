@@ -34,7 +34,8 @@ function Notifications() {
            task && task.map((item, index) => (
               <>
               {
-                 moment(item.StartDate).isAfter(new Date().toLocaleDateString) &&
+                
+                 (moment(item.StartDate).isAfter(new Date().toLocaleDateString())) &&
                   <div className="card" key={index}>
                     <h5>Task Name: { item.TaskName}</h5>
                     <h5>Start Date: { moment(item.StartDate).utc().format('DD/MM/YYYY') }</h5>
@@ -52,10 +53,13 @@ function Notifications() {
         {
            task && task.map((item, index) => (
               <>
+              {
+                moment(item.CloseDate).isBefore(new Date().toLocaleDateString()) &&
                 <div className="card" key={index}>
                   <h5>Task Name: { item.TaskName}</h5>
                   <h5>Close Date was: {moment(item.CloseDate).utc().format('DD/MM/YYYY')}</h5>
                 </div>
+              }
               </> 
           ))}
       </div>

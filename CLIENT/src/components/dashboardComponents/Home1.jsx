@@ -76,14 +76,14 @@ function Home1() {
            task && task.map((item, index) => (
               <>
               { 
-                ((moment(item.CloseDate).diff(new Date().toLocaleString(),'days')) > 0) &&   
+                ((moment(item.CloseDate).diff(new Date().toLocaleString(),'days')) < (moment(item.CloseDate).diff(item.StartDate)))&& 
                 <div className="card" key={index}>
-                <h5>Task Name: { item.TaskName}</h5>
-                <h5>Progress: </h5> 
-                <h5 id='dueDate'>Due in: { moment(item.CloseDate).diff(new Date().toLocaleString(),'days')} Days</h5>
-
-              </div>
-              }
+                  <h5>Task Name: { item.TaskName}</h5>
+                  <h5>Progress: </h5> 
+                  <h5 id='due'>Due in: { moment(item.CloseDate).diff(new Date().toLocaleString(),'days')} Days</h5>
+                </div>
+                }
+              
                
               </> 
           ))}

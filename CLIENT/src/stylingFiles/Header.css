@@ -38,13 +38,14 @@
     text-decoration: none;
     color: rgb(244, 243, 245);
     font-size: larger;
+    font-weight: 700;
   }
   .signUp-link{
-    background-color: rgba(255, 255, 255, 0.096);
+    background-color: rgba(255, 255, 255, 0.034);
     text-decoration: none;
     color: rgb(244, 241, 250);
     font-size: larger;
-    font-weight: 700;
+    font-weight: 900;
     border-radius: 5px;
     padding: 5px; 
   }
