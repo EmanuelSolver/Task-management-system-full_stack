@@ -19,21 +19,20 @@ function UpdatePassword() {
             .oneOf([yup.ref("password"), null], "Passwords Don't match"),
 
         username: yup.string().required(),
-        email: yup.string().required(),
-      
+        email: yup.string().required(),   
     })
 
     const { register, handleSubmit,formState: { errors }, reset } = useForm({
 
     resolver: yupResolver(schema),
     });
+    
 
     const dataToServer = (data) => {
-    console.log(data)
 
-        axios.put(`${apiDomain}/updatePassword`, data)
+        axios.put(`${apiDomain}/users`, data)
             .then((response) =>{
-                response.data.message && toast.success(response.data.message, {
+                response.data.Message && toast.success(response.data.Message, {
                   position: "top-right",
                   autoClose: 3000,
                   hideProgressBar: false,
@@ -42,13 +41,20 @@ function UpdatePassword() {
                   draggable: true,
                   progress: undefined,
                   theme: "light",
-                  });
-                console.log(response)
-                reset()
+                  })
+            reset()
             })
             .catch((response) =>{
-                alert(response.data.error);
-                console.log(response)
+                toast.error(response.data.error,{
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
 
             });
     };
@@ -62,11 +68,11 @@ function UpdatePassword() {
 
           <label htmlFor="">Confirm Email</label>
               <input type="text" {...register("email")}/>
-              <p>{errors.nationalId?.message}</p>
+              <p>{errors.email?.message}</p>
 
           <label htmlFor="">UserName</label>
               <input type="text" {...register("username")}/>
-              <p>{errors.nationalId?.message}</p>
+              <p>{errors.username?.message}</p>
 
           <label htmlFor="">New Password:</label>
               <input type="password"{...register("password")}/>

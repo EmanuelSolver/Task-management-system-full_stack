@@ -62,3 +62,39 @@ export const login = async(req, res) => {
         }
     }
 }
+
+
+export const updatePassword = async(req, res) =>{
+    const { email, username, confirmPassword } = req.body;
+    const hashedPassword = bcrypt.hashSync(confirmPassword, 10);
+    
+    try {
+        let pool = await sql.connect(config.sql)
+
+        const result = await pool.request()
+            .input('email', sql.VarChar, email)
+            .input('username', sql.VarChar, username)
+            .query('SELECT * FROM Users WHERE UserName = @username AND Email = @email');
+    
+        const user = result.recordset[0];
+        if (user) { 
+            await pool.request()
+                .input('username', sql.VarChar, username)
+                .input('hashedPassword', sql.VarChar, hashedPassword)
+                .query('UPDATE Users SET Password = @hashedPassword WHERE UserName = @username');
+            res.status(200).json({ Message: 'Password Updated successfully' });
+
+        } else{
+            res.status(404).json({ Error: "User Doesn't Exist" });
+
+        }
+      
+    } catch (error) {
+
+        res.status(500).json({ Error: error.message });
+    } finally {
+
+        sql.close();
+    }
+
+};
