@@ -22,7 +22,7 @@
 .sidenav-item{
     font-size: large;
     padding-left: 2rem;
-
+    cursor: pointer;
 }
 .sidenav-item:hover{
     background-color: #fff;

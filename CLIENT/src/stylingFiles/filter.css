@@ -9,7 +9,7 @@
     height: 40vh;
     overflow-x: scroll;
     flex-direction: row;
-    background-color: #e4e3e3;
+    background-color: rgb(238, 238, 238);
     border-radius: 20px;
     margin-top: 1rem;
 }
