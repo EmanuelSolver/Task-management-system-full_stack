@@ -1,117 +1,114 @@
-import axios from "axios";
-import '../../stylingFiles/EditTask.css';
+import { useContext, useState, useEffect } from 'react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
 import { FaTimes } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { apiDomain } from '../../utils/utils'
-import { useState, useContext, useEffect } from "react";
-import { ContextUser } from "../../context/userContext/userContext";
-import PropTypes from 'prop-types';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { apiDomain } from '../../utils/utils';
 import moment from 'moment';
+import { ContextUser } from '../../context/userContext/userContext';
 
 const EditTask = ({ setOpen, item }) => {
-  
-    console.log(item)
+  const [members, setMembers] = useState([]);
+  const [project, setProject] = useState([]);
+  const [priority, setPriority] = useState(item.Priority);
+  const [start, setStart] = useState(item.StartDate);
+  const [end, setEnd] = useState(item.CloseDate);
+  const [memb, setMemb] = useState(item.ProjectManager);
+  const [projName, setProjName] = useState(item.ProjectName);
+  const [task, setTask] = useState(item.TaskName);
 
-    const { user } = useContext(ContextUser)
-    //get projects and users from the database
-    const [members, setMembers] = useState([])
-    const [project, setProject] = useState([])
-    const [start, setStart] = useState(item.StartDate)
-    const [projName, setProjName] = useState(item.ProjectName)
-    const [task, seTask] = useState(item.TaskName);
-    
-    const getMembers = async () => {
-        const response = await axios.get(`${apiDomain}/users`,{
-         headers: { 'Authorization': `${user.token}` },
-     })
-        setMembers(response.data)
-    }
+  const { user } = useContext(ContextUser);
 
-    //get projects
-    const getProjects = async () => {
-      const res = await axios.get(`${apiDomain}/projects`,{
-       headers: { 'Authorization': `${user.token}` },
-   })
-      setProject(res.data)
-  }
+  useEffect(() => {
+    getMembers();
+    getProjects();
+  }, []);
 
-  useEffect(() =>{
-    
-      getMembers()
-      getProjects()
-  }, [])
+  const getMembers = async () => {
+    const response = await axios.get(`${apiDomain}/users`, {
+      headers: { Authorization: `${user.token}` },
+    });
+    setMembers(response.data);
+  };
 
+  const getProjects = async () => {
+    const res = await axios.get(`${apiDomain}/projects`, {
+      headers: { Authorization: `${user.token}` },
+    });
+    setProject(res.data);
+  };
 
-   //create a schema to validate input fields before submission
-   const schema = yup.object().shape({
-       project: yup.string().required('select a project'),
-       taskName: yup.string().required('Type task Name'),
-       end: yup.string().required(),
-       start: yup.string().required(),
-       member: yup.string().required('select member'),
-       
-   });
+  const schema = yup.object().shape({
+    project: yup.string().required('Select a project'),
+    taskName: yup.string().required('Type task Name'),
+    end: yup.string().required(),
+    start: yup.string().required(),
+    member: yup.string().required('Select a member'),
+  });
 
-   const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      project: projName,
+      taskName: task,
+      start: start,
+    },
+  });
 
-       resolver: yupResolver(schema),
-   });
-
-       //send data to the database via the local API using axios
-const dataToServer = (data) => {
-    console.log(data)
-
-   axios.put(`${apiDomain}/tasks`, data,{
-     headers: { 'Authorization': `${user.token}` },
-    }).then((response) =>{
-       response.data.message && toast.success(response.data.message, {
-         position: "top-right",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-         theme: "light",
-         });
-       
-     })
-     .catch(({response}) =>{
-
-       toast.error(response.data.error, {
-         position: "top-center",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-         theme: "colored",
-         });
-     })
- }; 
-
- const checkDate = (e) => {
-    //calculation of days
-    let end = e.target.value
-    let result = moment(end).diff(start,'days')
-
-    result < 0 && toast.error('Closing Date must be ahead of Start Date', {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
+  const dataToServer = (data) => {
+    console.log(data);
+    axios
+      .put(`${apiDomain}/tasks`, data, {
+        headers: { Authorization: `${user.token}` },
       })
-  }
- 
+      .then((response) => {
+        response.data.message &&
+          toast.success(response.data.message, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+          });
+      })
+      .catch(({ response }) => {
+        toast.error(response.data.error, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        });
+      });
+  };
+
+  const checkDate = (e) => {
+    let end1 = e.target.value;
+    let result = moment(end1).diff(start, 'days');
+
+    result < 0 &&
+      toast.error('Closing Date must be ahead of Start Date', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
+      setEnd(end)
+  };
 
   return (
     <div className="add">
@@ -121,82 +118,90 @@ const dataToServer = (data) => {
         </span>
 
         <form onSubmit={handleSubmit(dataToServer)}>
-                <h2>Edit Task</h2>
-            <div>
-                <label htmlFor="name">Project</label> <br />
-                <select name="" id="" value={projName} {...register("project")} >
-                    <option > - select - </option>
-                    {
-                    project && project.map((item, index) => (
-                        <option key={index} value={index + 1}> {item.ProjectName} </option>
-                    ))}
-                </select>              
-                <span>{errors.project?.message}</span> 
-            </div>
+          <h2>Edit Task</h2>
 
-            <div>
-              <label htmlFor="task">Task Name</label>
-                <input type="text" {...register("taskName")} value={task}/>
-                <span>{errors.taskName?.message}</span>
-            </div> 
-            <div>
-              <label htmlFor="task">Priority</label> 
-                <select name="" id="" value={item.Priority} {...register("priority")}>
-                  <option value="">-select-</option>
-                  <option value="high">High</option>
-                  <option value="medium">Medium</option>
-                  <option value="low">Low</option>
-                </select>
-                <span>{errors.priority?.message}</span>
-            </div> 
+          <div>
+            <label htmlFor="name">Project</label> <br />
+            <select name="" id="" {...register('project')} value={projName} onChange={(e) => setProjName(e.target.value)}>
+              <option value="">- select -</option>
+              {project &&
+                project.map((proj, index) => (
+                  <option key={index} value={proj.ProjectName}>
+                    {proj.ProjectName}
+                  </option>
+                ))}
+            </select>
 
-            <div>
-                <label htmlFor="start">Start Date</label>
-                <input id='start' type="date"{...register("start")} value={item.StartDate} onChange={e =>setStart(e.target.value)}/>              
-                <span>{errors.start?.message}</span>
-            </div>
+            <span>{errors.project?.message}</span>
+          </div>
 
-            <div>
-                <label htmlFor="">Close Date</label><br />
-                <input type="date" {...register("end")} onChange={checkDate}/>
-              <span>{errors.end?.message}</span>
-            </div>
+          <div>
+            <label htmlFor="task">Task Name</label>
+            <input type="text" {...register('taskName')} onChange={(e) => setTask(e.target.value)} />
+            <span>{errors.taskName?.message}</span>
+          </div>
 
-            <div>
-                <label htmlFor="">Assign Member</label>
-                <select name="" id="" {...register("member")}>
-                <option > - select - </option>
-                    {
-                    members && members.map((item, index) => (
-                        <option key={index} value={index + 1}> {item.UserName} </option>
-                    ))}
-                </select>
-              <span>{errors.member?.message}</span>
-            </div>
+          <div>
+            <label htmlFor="task">Priority</label>
+            <select name="" id="" {...register('priority')} value={priority} onChange={(e) => setPriority(e.target.value)}>
+              <option value="">- select -</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+            <span>{errors.priority?.message}</span>
+          </div>
 
-            <button type="submit">Save</button>
-      
-            <ToastContainer
-              position="top-center"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="dark"
-              />
-          </form>  
+          <div>
+            <label htmlFor="start">Start Date</label>
+            <input id="start" type="date" {...register('start')} onChange={(e) => setStart(e.target.value)} />
+            <span>{errors.start?.message}</span>
+          </div>
+
+          <div>
+            <label htmlFor="">Close Date</label>
+            <br />
+            <input type="date" {...register('end')}  onChange={checkDate} />
+            <span>{errors.end?.message}</span>
+          </div>
+
+          <div>
+            <label htmlFor="">Assign Member</label>
+            <select name="" id="" {...register('member')} onChange={(e) =>setMemb(e.target.value)}>
+              <option value="">- select -</option>
+              {members &&
+                members.map((mem, index) => (
+                  <option key={index} value={mem.UserName}>
+                    {mem.UserName}
+                  </option>
+                ))}
+            </select>
+            <span>{errors.member?.message}</span>
+          </div>
+
+          <button type="submit">Save</button>
+
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
+        </form>
       </div>
     </div>
   );
 };
 
 EditTask.propTypes = {
-    setOpen: PropTypes.func.isRequired,
-    item: PropTypes.func.isRequired
-  };
+  setOpen: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired,
+};
 
 export default EditTask;

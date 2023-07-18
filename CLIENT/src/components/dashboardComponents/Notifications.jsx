@@ -8,9 +8,7 @@ import moment from 'moment';
 
 
 function Notifications() {
-
   const { user } = useContext(ContextUser);
-
   const [task, setTask] = useState([])
 
   const getData = async () => {
@@ -53,13 +51,16 @@ function Notifications() {
         {
            task && task.map((item, index) => (
               <>
-              {
-                moment(item.CloseDate).isBefore(new Date().toLocaleDateString()) &&
-                <div className="card" key={index}>
-                  <h5>Task Name: { item.TaskName}</h5>
-                  <h5>Close Date was: {moment(item.CloseDate).utc().format('DD/MM/YYYY')}</h5>
-                </div>
-              }
+                 {
+                item.Progress < 100 &&
+                moment(item.CloseDate).isBefore(moment()) && 
+                (
+                  <div className="card" key={index}>
+                    <h5>Task Name: {item.TaskName}</h5>
+                    <h5>Task covered: {item.Progress} %</h5>
+                    <h5>Close Date was: {moment(item.CloseDate).utc().format('DD/MM/YYYY')}</h5>
+                  </div>
+                )}
               </> 
           ))}
       </div>

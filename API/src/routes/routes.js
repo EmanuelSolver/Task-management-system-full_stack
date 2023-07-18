@@ -1,4 +1,4 @@
-import {getTasks, getProjects, createTask, updateTask, deleteTask, taskByProject, taskByPriority} from '../controllers/taskController.js';
+import {getTasks, getProjects, createTask, updateTask, taskProgress, deleteTask, taskByProject, taskByPriority} from '../controllers/taskController.js';
 import { login, register, loginRequired, updatePassword } from '../controllers/authControllers.js';
 import { getUsers } from '../controllers/userController.js';
 
@@ -11,12 +11,15 @@ const routes = (app) => {
 
     app.route('/tasks/:id')
         .delete(loginRequired, deleteTask)
+        .put(taskProgress)
+
     
     app.route('/taskPriority/:priority')
         .post(taskByPriority)
 
     app.route('/taskProject/:proj')
         .post(taskByProject)
+
 
     app.route('/users')
         .put(updatePassword)

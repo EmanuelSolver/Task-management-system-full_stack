@@ -53,8 +53,7 @@
     justify-content: space-around;
 }
 
-.activity{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#done{
+    cursor: pointer;
+    margin-left: 2.5rem;
 }

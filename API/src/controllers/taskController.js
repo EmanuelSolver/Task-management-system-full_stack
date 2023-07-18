@@ -14,7 +14,7 @@ export const createTask = async (req, res) => {
       .input('start', sql.VarChar, start)
       .input('end', sql.VarChar, end)
       .input('member', sql.Int, member)
-      .query('INSERT INTO Tasks(TaskName, Priority, StartDate, CloseDate, ProjectId, UserId) VALUES (@taskName, @priority, @start, @end,  @project, @member)');
+      .query('INSERT INTO Tasks(TaskName, Priority, StartDate, CloseDate, ProjectId, UserId, Progress) VALUES (@taskName, @priority, @start, @end,  @project, @member, 0)');
 
     res.status(200).send({ message: 'Task added successfully' });
   } catch (error) {
@@ -33,7 +33,7 @@ export const getTasks = async (req, res) => {
     try {
 
       const result = await pool.request().query(
-        "SELECT t.Id, t.TaskName, t.StartDate, t.CloseDate, p.ProjectName, p.ProjectManager FROM Tasks t JOIN Projects p ON t.ProjectId = p.Id"
+        "SELECT t.Id, t.TaskName, t.StartDate, t.CloseDate, t.Progress, t.Priority, p.ProjectName, p.ProjectManager FROM Tasks t JOIN Projects p ON t.ProjectId = p.Id"
       ); // Query the tasks and projects tables
   
       if (result.recordset.length === 0) {
@@ -45,9 +45,9 @@ export const getTasks = async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: error.message });
     } 
-    finally {
-      sql.close(); // Close the SQL connection
-    }
+    // finally {
+    //   sql.close(); // Close the SQL connection
+    // }
   };
   
 
@@ -94,10 +94,10 @@ export const getProjects = async (req, res) => {
 
         res.status(201).json({ error: error.message });
     }
-    finally {
+    // finally {
 
-        sql.close(); // Close the SQL connection
-    }
+    //     sql.close(); // Close the SQL connection
+    // }
 };
 
 
@@ -121,9 +121,10 @@ export const taskByPriority = async(req, res) =>{
       }
     } catch (error) {
       res.status(500).json({ error: error.message });
-    } finally {
-      sql.close(); // Close the SQL connection
-    }
+    } 
+    // finally {
+    //   sql.close(); // Close the SQL connection
+    // }
 }
 
 
@@ -147,9 +148,10 @@ export const taskByProject = async(req, res) =>{
       }
     } catch (error) {
       res.status(500).json({ error: error.message });
-    } finally {
-      //sql.close(); // Close the SQL connection
-    }
+    } 
+    // finally {
+    //   sql.close(); // Close the SQL connection
+    // }
 }
 
 
@@ -171,9 +173,32 @@ export const updateTask = async(req, res) =>{
   } catch (error) {
 
       res.status(500).json({ error: error.message });
-  } finally {
+  } 
+  // finally {
 
-      sql.close();
-  }
+  //     sql.close();
+  // }
 
+}
+
+export const taskProgress = async(req, res) =>{
+  const { id} = req.params;
+  const { progress } = req.body;
+  
+  let pool = await sql.connect(config.sql);
+  try {
+        await pool.request()
+        .input('progress', sql.Int, progress)
+        .input('id', sql.Int, id)
+        .query('UPDATE Tasks SET Progress = @progress WHERE Id = @id');
+        res.status(200).send({ message: 'Progress Updated successfully' });   
+
+  } catch (error) {
+
+      res.status(500).json({ error: error.message });
+  } 
+  // finally {
+
+  //     sql.close();
+  // }
 }

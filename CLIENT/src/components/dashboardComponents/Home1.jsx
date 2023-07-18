@@ -2,19 +2,23 @@ import '../../stylingFiles/Home1.css';
 import { MdOutlineVerifiedUser } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
 import { LuClipboardEdit } from 'react-icons/lu';
+import { LuBookmarkPlus } from 'react-icons/lu'
 import { apiDomain } from '../../utils/utils';
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import { ContextUser } from '../../context/userContext/userContext';
 import moment from 'moment';
 import EditTask from '../dashboardComponents/EditTask';
+import TrackProgress from '../dashboardComponents/TrackProgress'
 
 function Home1() {
   const [open, setOpen] = useState(false);
   const [task, setTask] = useState([]);
-  const [myTask, setMyTask] = useState({'...':'...'});
-
+  const [open2, setOpen2] = useState(false);
+  const [myTask, setMyTask] = useState({});
+  const [myTask2, setMyTask2] = useState({});
   const { user } = useContext(ContextUser);
+
 
   const getData = async () => {
     try {
@@ -46,38 +50,16 @@ function Home1() {
   }
 
   useEffect(() => {
+
     getData();
   }, []);
 
 
-
-  //Progress Tracker 
-  let [progress, setProgress] = useState(-10);
-  const [isChecked, setIsChecked] = useState(false);
-
-  const updateProgress = () => {
-    const currentDate = new Date();
-    progress += 5 ;
-    // You can replace the above line with your own logic to get the current day
-
-    // Reset isChecked to false at the start of each day
-    if (progress <= 100) {
-      setProgress(progress);
-    }
-    else if(currentDate){
-      setIsChecked(false);
-
-    }
-  };
-  useEffect(() => {
-   
-
-    updateProgress();
-  }, [isChecked]);
-
-  const handleCheckboxChange = (e) => {
-    setIsChecked(e.target.checked);
-  };
+  const handleProgress = (item) => {
+    setOpen2(true)
+    const tempItem = item
+    setMyTask2(tempItem)
+  }
 
   return (
     <div className="tasks">
@@ -103,7 +85,6 @@ function Home1() {
               {open && <EditTask setOpen={setOpen} item={myTask} />}
             </div>
           ))
-
           }
       </div>
 
@@ -114,27 +95,20 @@ function Home1() {
           task.map((item, index) => (
             <>
               {moment(item.StartDate).isSameOrBefore(moment(), 'day') &&
+              item.Progress < 100 &&
               moment(item.CloseDate).isAfter(moment(), 'day') ? (
                 <div className="card" key={index}>
                   <h5>Task Name: {item.TaskName}</h5>
-                  <h5>Progress: {progress} %</h5>
+                  <h5>Progress: {item.Progress} %</h5>
                   <h5 id="due">Due in: {moment(item.CloseDate).diff(moment(), 'days')} Days</h5>
                 
-                  <div className='activity'>
-                  {!isChecked && (
-                    <>
-                      <h5>Activity_Done</h5>
-                      <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/>
-
-                    </>   
-                  )}
-                  </div>
-            
+                  <h4 id="done" onClick={() => handleProgress(item)}>
+                  <LuBookmarkPlus /> Check Activity
+                  </h4>
+                  {open2 && <TrackProgress setOpen2={setOpen2} item={myTask2} />}
                 </div>
                 
               ) : null}
-
-           
 
             </>
           ))}
@@ -145,14 +119,17 @@ function Home1() {
         {task &&
           task.map((item, index) => (
             <>
-              {moment(item.CloseDate).isBefore(moment(), 'day') && (
+              {moment(item.CloseDate).isSameOrAfter(moment(), 'day') && 
+              item.Progress == 100 ?
+              (
                 <div className="card" key={index}>
                   <h5>Task Name: {item.TaskName}</h5>
                   <h5 id="complete">
                     Status: Completed <MdOutlineVerifiedUser />
                   </h5>
                 </div>
-              )}
+              ): null
+            }
             </>
           ))}
       </div>
