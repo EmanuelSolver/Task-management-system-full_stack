@@ -6,7 +6,6 @@ import { useContext } from 'react';
 import { ContextUser } from '../../context/userContext/userContext';
 import moment from 'moment';
 
-
 function Notifications() {
   const { user } = useContext(ContextUser);
   const [task, setTask] = useState([])
@@ -27,12 +26,10 @@ function Notifications() {
         <div className="future">
         <div className="title-btn">Future Tasks</div>
          <h6>You have Forthcoming Tasks expected to complete</h6>
-
           {
            task && task.map((item, index) => (
               <>
               {
-                
                  (moment(item.StartDate).isAfter()) &&
                   <div className="card" key={index}>
                     <h5>Task Name: { item.TaskName}</h5>
@@ -40,9 +37,7 @@ function Notifications() {
                   </div>
               }
               </> 
-          ))}
-          
-    
+          ))} 
       </div>
 
       <div className="overdue">

@@ -1,7 +1,7 @@
 import '../../stylingFiles/sideNav.css'
 import { ImHome } from 'react-icons/im'
 import { GoGraph } from 'react-icons/go'
-import { LuCalendarDays } from 'react-icons/lu'
+import { BsFillFilterSquareFill } from 'react-icons/bs'
 import { MdOutlineNotificationImportant } from 'react-icons/md'
 import {PiProjectorScreenFill } from 'react-icons/pi'
 import { FiSettings } from 'react-icons/fi'
@@ -46,7 +46,7 @@ export function SideNav() {
             <div className="sidenav-item" onClick={handleHome}><ImHome/> Home</div>
             <div className="sidenav-item" onClick={handleNotifications}><MdOutlineNotificationImportant/> Notifications</div>
             <div className="sidenav-item" onClick={handleProjects}><PiProjectorScreenFill /> Projects</div>
-            <div className="sidenav-item" onClick={handleFilter}><LuCalendarDays/> Filter Tasks</div>
+            <div className="sidenav-item" onClick={handleFilter}><BsFillFilterSquareFill/> Filter Tasks</div>
             <div className="sidenav-item" onClick={handleAnalytics}><GoGraph/> Analytics</div>
             <div className="sidenav-item" onClick={handleSettings}><FiSettings/> Settings</div>
         </div>

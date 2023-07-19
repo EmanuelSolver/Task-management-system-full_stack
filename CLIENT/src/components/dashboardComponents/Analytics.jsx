@@ -1,3 +1,4 @@
+import '../../stylingFiles/Analytics.css'
 import { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
@@ -15,12 +16,12 @@ const Analytics = () => {
     chartInstanceRef.current = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Label 1', 'Label 2', 'Label 3'],
+        labels: ['supervise', 'Database Design', 'Frontend Design', 'Mobile Design', 'Backend', 'Data Analysis', 'Figma mobile design'],
         datasets: [
           {
-            label: 'Data',
-            data: [10, 20, 30],
-            backgroundColor: ['red', 'blue', 'green'],
+            label: 'Progression of Tasks',
+            data: [9, 100, 32, 45, 73, 100, 24],
+            backgroundColor: ['#58508d', '#bc5090', '#003f5c' ],
           },
         ],
       },
@@ -32,7 +33,7 @@ const Analytics = () => {
               display: true,
               text: 'Tasks in Progress',
               font: {
-                weight: 'bold',
+                weight: '800',
               },
             },
           },
@@ -42,7 +43,7 @@ const Analytics = () => {
               display: true,
               text: 'Progress in Percentage', 
               font: {
-                weight: 'bold',
+                weight: '800',
               },
             },
           },
@@ -57,7 +58,11 @@ const Analytics = () => {
     };
   }, []);
 
-  return <canvas ref={chartRef} />;
+  return(
+    <div className='bar'>
+      <canvas ref={chartRef} />;
+    </div>
+  ) 
 };
 
 export default Analytics;
