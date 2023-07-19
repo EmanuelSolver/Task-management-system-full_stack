@@ -15,7 +15,7 @@ const ProgressTracker = ({ setOpen2, item }) => {
     //update progress coming from the database 
     let taskDuration = moment(item.CloseDate).diff(item.StartDate, 'days')
     //increment progress in regard to task duration
-    let increment = Math.round(100 / taskDuration);
+    let increment = (Math.round(100 / taskDuration)) / 2;
     progress += increment;
 
     setIsChecked(e.target.checked);
@@ -34,7 +34,7 @@ const ProgressTracker = ({ setOpen2, item }) => {
   useEffect(() => {
 
     handleCheckboxChange();
-  }, [isChecked]);
+  }, []);
 
   return (
     <div className="add">

@@ -21,7 +21,6 @@ const routes = (app) => {
     app.route('/taskProject/:proj')
         .post(taskByProject)
 
-
     app.route('/users')
         .put(updatePassword)
         .get(loginRequired, getUsers)
