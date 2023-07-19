@@ -15,12 +15,11 @@ const EditTask = ({ setOpen, item }) => {
   const [members, setMembers] = useState([]);
   const [project, setProject] = useState([]);
   const [priority, setPriority] = useState(item.Priority);
-  const [start, setStart] = useState(item.StartDate);
-  const [end, setEnd] = useState(item.CloseDate);
-  const [memb, setMemb] = useState(item.ProjectManager);
+  const [start, setStart] = useState(moment(item.StartDate ).format("YYYY-MM-DD"));
+  const [end, setEnd] = useState(moment(item.CloseDate ).format("YYYY-MM-DD"));
+  const [memb, setMemb] = useState(item.UserName);
   const [projName, setProjName] = useState(item.ProjectName);
   const [task, setTask] = useState(item.TaskName);
-
   const { user } = useContext(ContextUser);
 
   useEffect(() => {
@@ -60,9 +59,8 @@ const EditTask = ({ setOpen, item }) => {
   });
 
   const dataToServer = (data) => {
-    console.log(data);
-    axios
-      .put(`${apiDomain}/tasks`, data, {
+   
+    axios.put(`${apiDomain}/tasks/${item.Id}`, data, {
         headers: { Authorization: `${user.token}` },
       })
       .then((response) => {
@@ -107,7 +105,8 @@ const EditTask = ({ setOpen, item }) => {
         progress: undefined,
         theme: 'colored',
       });
-      setEnd(end)
+
+    setEnd(end)
   };
 
   return (
@@ -126,7 +125,7 @@ const EditTask = ({ setOpen, item }) => {
               <option value="">- select -</option>
               {project &&
                 project.map((proj, index) => (
-                  <option key={index} value={proj.ProjectName}>
+                  <option key={index} value={index + 1}>
                     {proj.ProjectName}
                   </option>
                 ))}
@@ -154,7 +153,7 @@ const EditTask = ({ setOpen, item }) => {
 
           <div>
             <label htmlFor="start">Start Date</label>
-            <input id="start" type="date" {...register('start')} onChange={(e) => setStart(e.target.value)} />
+            <input id="start" type="date" {...register('start')}  onChange={(e) => setStart(e.target.value)} />
             <span>{errors.start?.message}</span>
           </div>
 
@@ -167,11 +166,11 @@ const EditTask = ({ setOpen, item }) => {
 
           <div>
             <label htmlFor="">Assign Member</label>
-            <select name="" id="" {...register('member')} onChange={(e) =>setMemb(e.target.value)}>
+            <select name="" id="" {...register('member')} value={memb} onChange={(e) =>setMemb(e.target.value)}>
               <option value="">- select -</option>
               {members &&
                 members.map((mem, index) => (
-                  <option key={index} value={mem.UserName}>
+                  <option key={index} value={index + 1}>
                     {mem.UserName}
                   </option>
                 ))}

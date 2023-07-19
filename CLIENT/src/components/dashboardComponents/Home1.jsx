@@ -46,7 +46,6 @@ function Home1() {
     const pop = item
     setMyTask(pop)
     setOpen(true)
-    console.log(myTask)
   }
 
   useEffect(() => {
@@ -120,7 +119,7 @@ function Home1() {
           task.map((item, index) => (
             <>
               {moment(item.CloseDate).isSameOrAfter(moment(), 'day') && 
-              item.Progress == 100 ?
+              item.Progress >= 100 ?
               (
                 <div className="card" key={index}>
                   <h5>Task Name: {item.TaskName}</h5>

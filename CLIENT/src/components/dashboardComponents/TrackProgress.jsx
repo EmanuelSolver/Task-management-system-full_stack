@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { FaTimes } from 'react-icons/fa';
 import '../../stylingFiles/EditTask.css';
 import { apiDomain } from '../../utils/utils';
+import moment from 'moment';
 
 const ProgressTracker = ({ setOpen2, item }) => {
   let [progress, setProgress] = useState(item.Progress);
@@ -12,7 +13,10 @@ const ProgressTracker = ({ setOpen2, item }) => {
 
   const handleCheckboxChange = async (e) => {
     //update progress coming from the database 
-    progress += 5;
+    let taskDuration = moment(item.CloseDate).diff(item.StartDate, 'days')
+    //increment progress in regard to task duration
+    let increment = Math.round(100 / taskDuration);
+    progress += increment;
 
     setIsChecked(e.target.checked);
     setProgress(progress)
@@ -20,7 +24,7 @@ const ProgressTracker = ({ setOpen2, item }) => {
     try {
         console.log('progress =' + progress)
       // update Progress
-      await axios.put(`${apiDomain}/tasks/${item.Id}`, { progress: progress })
+      await axios.put(`${apiDomain}/progress/${item.Id}`, { progress: progress })
       console.log('Progress stored successfully!');
     } catch (error) {
       console.error('Failed to store progress:', error);

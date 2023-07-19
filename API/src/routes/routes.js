@@ -7,13 +7,14 @@ const routes = (app) => {
     app.route('/tasks')
         .get(loginRequired, getTasks)
         .post(loginRequired, createTask)
-        .put(loginRequired, updateTask)
 
     app.route('/tasks/:id')
         .delete(loginRequired, deleteTask)
+        .put(loginRequired, updateTask)
+
+    app.route('/progress/:id')
         .put(taskProgress)
 
-    
     app.route('/taskPriority/:priority')
         .post(taskByPriority)
 

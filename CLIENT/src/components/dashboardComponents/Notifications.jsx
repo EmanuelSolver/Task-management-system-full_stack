@@ -33,7 +33,7 @@ function Notifications() {
               <>
               {
                 
-                 (moment(item.StartDate).isAfter(new Date().toLocaleDateString())) &&
+                 (moment(item.StartDate).isAfter()) &&
                   <div className="card" key={index}>
                     <h5>Task Name: { item.TaskName}</h5>
                     <h5>Start Date: { moment(item.StartDate).utc().format('DD/MM/YYYY') }</h5>

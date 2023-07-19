@@ -56,36 +56,36 @@ function Projects() {
     });
 
         //send data to the database via the local API using axios
-const dataToServer = (data) => {
+  const dataToServer = (data) => {
 
-    axios.post(`${apiDomain}/tasks`, data,{
-      headers: { 'Authorization': `${user.token}` },
-  }).then((response) =>{
-        response.data.message && toast.success(response.data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });
-        
-      })
-      .catch(({response}) =>{
+        axios.post(`${apiDomain}/tasks`, data,{
+          headers: { 'Authorization': `${user.token}` },
+      }).then((response) =>{
+            response.data.message && toast.success(response.data.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              });
+            
+          })
+          .catch(({response}) =>{
 
-        toast.error(response.data.error, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          });
-      })
+            toast.error(response.data.error, {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              });
+          })
   }; 
 
   const checkDate = (e) => {
@@ -103,7 +103,7 @@ const dataToServer = (data) => {
        progress: undefined,
        theme: "colored",
        })
-   }
+  }
      
   
   return (
@@ -126,6 +126,7 @@ const dataToServer = (data) => {
                 <input type="text" id="task" {...register("taskName")}/>
                 <span>{errors.taskName?.message}</span>
             </div> 
+
             <div>
               <label htmlFor="task">Priority</label> 
                 <select name="" id="" {...register("priority")}>

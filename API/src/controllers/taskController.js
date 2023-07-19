@@ -4,7 +4,7 @@ import config from '../db/config.js'
 
 export const createTask = async (req, res) => {
   const { project, taskName, priority, start, end, member } = req.body;
-  let pool = await sql.connect(config.sql);
+  const pool = await sql.connect(config.sql);
 
   try {
       await pool.request()
@@ -28,12 +28,12 @@ export const createTask = async (req, res) => {
 
 export const getTasks = async (req, res) => {
 
-  let pool = await sql.connect(config.sql); // Establish a connection to the database
+  const pool = await sql.connect(config.sql); // Establish a connection to the database
 
     try {
 
       const result = await pool.request().query(
-        "SELECT t.Id, t.TaskName, t.StartDate, t.CloseDate, t.Progress, t.Priority, p.ProjectName, p.ProjectManager FROM Tasks t JOIN Projects p ON t.ProjectId = p.Id"
+        "SELECT t.Id, t.TaskName, t.StartDate, t.CloseDate, t.Progress, t.Priority, u.UserName, p.ProjectName, p.ProjectManager FROM Tasks t JOIN Projects p ON t.ProjectId = p.Id JOIN users u ON t.UserId = u.Id"
       ); // Query the tasks and projects tables
   
       if (result.recordset.length === 0) {
@@ -54,7 +54,7 @@ export const getTasks = async (req, res) => {
 export const deleteTask = async (req, res) => {
   const { id } = req.params;
 
-  let pool = await sql.connect(config.sql); // Establish a connection to the database
+  const pool = await sql.connect(config.sql); // Establish a connection to the database
   try {
     const result = await pool
       .request()
@@ -81,7 +81,7 @@ export const deleteTask = async (req, res) => {
 
 
 export const getProjects = async (req, res) => {
-    let pool = await sql.connect(config.sql);  //establish a connection to the database
+    const pool = await sql.connect(config.sql);  //establish a connection to the database
 
     try {
         const result = await pool.request()        // make a request to the database
@@ -104,7 +104,7 @@ export const getProjects = async (req, res) => {
 export const taskByPriority = async(req, res) =>{
   const { priority } = req.params
 
-  let pool = await sql.connect(config.sql); // Establish a connection to the database
+  const pool = await sql.connect(config.sql); // Establish a connection to the database
   
     try {
       const result = await pool.request()
@@ -131,7 +131,7 @@ export const taskByPriority = async(req, res) =>{
 export const taskByProject = async(req, res) =>{
   const { proj } = req.params
 
-  let pool = await sql.connect(config.sql); // Establish a connection to the database
+  const pool = await sql.connect(config.sql); // Establish a connection to the database
   
     try {
       const result = await pool.request()
@@ -157,8 +157,9 @@ export const taskByProject = async(req, res) =>{
 
 export const updateTask = async(req, res) =>{
   const { project, taskName, priority, start, end, member} = req.body;
-  
-  let pool = await sql.connect(config.sql);
+  const { id } = req.params;
+
+  const pool = await sql.connect(config.sql);
   try {
         await pool.request()
         .input('taskName', sql.VarChar, taskName)
@@ -167,8 +168,9 @@ export const updateTask = async(req, res) =>{
         .input('start', sql.VarChar, start)
         .input('end', sql.VarChar, end)
         .input('member', sql.Int, member)
-        .query('UPDATE Tasks SET(TaskName, Priority, StartDate, CloseDate, ProjectId, UserId) VALUES (@taskName, @priority, @start, @end,  @project, @member)');
-        res.status(200).send({ message: 'Task added successfully' });   
+        .input('id', sql.Int, id)
+        .query('UPDATE Tasks SET TaskName = @taskName, Priority = @priority, StartDate = @start, CloseDate = @end, ProjectId = @project, UserId = @member WHERE Id = @id');
+        res.status(200).send({ message: 'Task updated successfully' });   
 
   } catch (error) {
 
@@ -185,7 +187,7 @@ export const taskProgress = async(req, res) =>{
   const { id} = req.params;
   const { progress } = req.body;
   
-  let pool = await sql.connect(config.sql);
+  const pool = await sql.connect(config.sql);
   try {
         await pool.request()
         .input('progress', sql.Int, progress)
