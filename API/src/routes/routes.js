@@ -1,4 +1,4 @@
-import {getTasks, getProjects, createTask, updateTask, taskProgress, deleteTask, taskByProject, taskByPriority} from '../controllers/taskController.js';
+import {getTasks, getProjects, createTask, updateTask, taskProgress, deleteTask, taskByProject, taskByPriority, createProject} from '../controllers/taskController.js';
 import { login, register, loginRequired, updatePassword } from '../controllers/authControllers.js';
 import { getUsers } from '../controllers/userController.js';
 
@@ -26,7 +26,10 @@ const routes = (app) => {
         .get(loginRequired, getUsers)
 
     app.route('/projects')
-        .get(loginRequired, getProjects)
+       .get(loginRequired, getProjects)
+
+    app.route('/projects/:id')
+        .post(createProject)
 
     //auth routes
     app.route('/signUp')

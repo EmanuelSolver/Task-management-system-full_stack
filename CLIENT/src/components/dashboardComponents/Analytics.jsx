@@ -2,10 +2,11 @@ import '../../stylingFiles/Analytics.css'
 import { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
+
 const Analytics = () => {
   const chartRef = useRef(null);
   const chartInstanceRef = useRef(null);
-
+  
   useEffect(() => {
     const ctx = chartRef.current.getContext('2d');
 
@@ -16,6 +17,7 @@ const Analytics = () => {
     chartInstanceRef.current = new Chart(ctx, {
       type: 'bar',
       data: {
+        // labels: taskNameArray,
         labels: ['supervise', 'Database Design', 'Frontend Design', 'Mobile Design', 'Backend', 'Data Analysis', 'Figma mobile design'],
         datasets: [
           {
@@ -64,5 +66,6 @@ const Analytics = () => {
     </div>
   ) 
 };
+
 
 export default Analytics;

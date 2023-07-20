@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { useContext } from 'react';
 import { ContextUser } from '../../context/userContext/userContext';
 import moment from 'moment';
+import CreateProject from './CreateProject';
 
 function Projects() {
     const { user } = useContext(ContextUser)
@@ -17,6 +18,7 @@ function Projects() {
      const [members, setMembers] = useState([])
      const [project, setProject] = useState([])
      const [start, setStart] = useState([])
+     const [open3, setOpen3] = useState(false);
 
      const getMembers = async () => {
          const response = await axios.get(`${apiDomain}/users`,{
@@ -107,77 +109,84 @@ function Projects() {
      
   
   return (
-    <form className="simple-form" onSubmit={handleSubmit(dataToServer)}>
+    <>
+      <div className='float-Btn'>
+        Are you a project  manager? <h5 onClick={() => setOpen3(true)}>Click here</h5>
+        {open3 && <CreateProject setOpen3 = {setOpen3}/>}
+      </div>
+      <form className="simple-form" onSubmit={handleSubmit(dataToServer)}>
                 
-            <div>
-                <label htmlFor="name">Project</label> <br />
-                <select name="" id="" {...register("project")}>
+                <div>
+                    <label htmlFor="name">Project</label> <br />
+                    <select name="" id="" {...register("project")}>
+                        <option > - select - </option>
+                        {
+                        project && project.map((item, index) => (
+                            <option key={index} value={index + 1}> {item.ProjectName} </option>
+                        ))}
+                    </select>              
+                    <span>{errors.project?.message}</span> 
+                </div>
+    
+                <div>
+                  <label htmlFor="task">Task Name</label>
+                    <input type="text" id="task" {...register("taskName")}/>
+                    <span>{errors.taskName?.message}</span>
+                </div> 
+    
+                <div>
+                  <label htmlFor="task">Priority</label> 
+                    <select name="" id="" {...register("priority")}>
+                      <option value="">-select-</option>
+                      <option value="high">High</option>
+                      <option value="medium">Medium</option>
+                      <option value="low">Low</option>
+                    </select>
+                    <span>{errors.priority?.message}</span>
+                </div> 
+    
+                <div>
+                    <label htmlFor="start">Start Date</label>
+                    <input id='start' type="date"{...register("start")} onChange={e =>setStart(e.target.value)}/>              
+                    <span>{errors.start?.message}</span>
+                </div>
+    
+                <div>
+                    <label htmlFor="">Close Date</label><br />
+                    <input type="date" {...register("end")} onChange={checkDate}/>
+                  <span>{errors.end?.message}</span>
+                </div>
+    
+                <div>
+                    <label htmlFor="">Assign Member</label>
+                    <select name="" id="" {...register("member")}>
                     <option > - select - </option>
-                    {
-                    project && project.map((item, index) => (
-                        <option key={index} value={index + 1}> {item.ProjectName} </option>
-                    ))}
-                </select>              
-                <span>{errors.project?.message}</span> 
-            </div>
-
-            <div>
-              <label htmlFor="task">Task Name</label>
-                <input type="text" id="task" {...register("taskName")}/>
-                <span>{errors.taskName?.message}</span>
-            </div> 
-
-            <div>
-              <label htmlFor="task">Priority</label> 
-                <select name="" id="" {...register("priority")}>
-                  <option value="">-select-</option>
-                  <option value="high">High</option>
-                  <option value="medium">Medium</option>
-                  <option value="low">Low</option>
-                </select>
-                <span>{errors.priority?.message}</span>
-            </div> 
-
-            <div>
-                <label htmlFor="start">Start Date</label>
-                <input id='start' type="date"{...register("start")} onChange={e =>setStart(e.target.value)}/>              
-                <span>{errors.start?.message}</span>
-            </div>
-
-            <div>
-                <label htmlFor="">Close Date</label><br />
-                <input type="date" {...register("end")} onChange={checkDate}/>
-              <span>{errors.end?.message}</span>
-            </div>
-
-            <div>
-                <label htmlFor="">Assign Member</label>
-                <select name="" id="" {...register("member")}>
-                <option > - select - </option>
-                    {
-                    members && members.map((item, index) => (
-                        <option key={index} value={index + 1}> {item.UserName} </option>
-                    ))}
-                </select>
-              <span>{errors.member?.message}</span>
-            </div>
-
-            <button type="submit" className="btn-login">Add</button>
-      
-            <ToastContainer
-              position="top-center"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="dark"
-              />
-
-          </form>  
+                        {
+                        members && members.map((item, index) => (
+                            <option key={index} value={index + 1}> {item.UserName} </option>
+                        ))}
+                    </select>
+                  <span>{errors.member?.message}</span>
+                </div>
+    
+                <button type="submit" className="btn-login">Add</button>
+          
+                <ToastContainer
+                  position="top-center"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="dark"
+                  />
+    
+      </form>  
+    </>
+    
   )
 }
 

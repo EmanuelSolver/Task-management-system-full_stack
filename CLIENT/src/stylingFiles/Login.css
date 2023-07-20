@@ -2,8 +2,8 @@
     width: 50%;
     border-radius: 7%;
     margin-left: 25%;
-    margin-top: 5%;
-    background-color: rgba(229, 229, 241, 0.507);
+    margin-top: 2%;
+    background-color: rgba(229, 229, 241, 0.678);
     font-family: cursive;
   
 }
@@ -23,9 +23,9 @@ span{
     margin-left: 25%;
 }
 input, select{
-    margin-top: 10px;
-    margin-bottom: 15px;
-    height: 30px;
+    /* margin-top: 10px; */
+    margin-bottom: 20px;
+    height: 25px;
 }
 h2{
     text-align: center;
@@ -39,4 +39,19 @@ h2{
     color: aliceblue;
     font-weight: 700;
     background-color: rgb(111, 5, 209);
+}
+.float-Btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 1%;
+    border-radius: 2rem;
+    background-color: rgba(229, 229, 241, 0.678);
+}
+.float-Btn>h5{
+    color: rgb(111, 5, 209);
+    cursor: pointer;
 }

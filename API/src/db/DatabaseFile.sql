@@ -11,8 +11,10 @@ CREATE TABLE users (
 CREATE TABLE Projects(
     Id INT IDENTITY(1,1),
     ProjectName VARCHAR(50) NOT NULL,
-    ProjectManager VARCHAR(50) NOT NULL,
-    PRIMARY KEY(Id)
+    ManagerId INT NOT NULL,
+    CreatedDate DATE NOT NULL,
+    PRIMARY KEY(Id),
+    FOREIGN KEY (ManagerId) REFERENCES users(Id)  ON DELETE CASCADE
 )
 
 CREATE TABLE Tasks(
@@ -22,14 +24,15 @@ CREATE TABLE Tasks(
     CloseDate DATE,
     ProjectId INT NOT NULL,
     UserId INT NOT NULL,
-
+    Priority VARCHAR (50) NOT NULL, 
+    Progress INT NOT NULL,
     PRIMARY KEY(Id),
     FOREIGN KEY (ProjectId) REFERENCES Projects(Id)  ON DELETE CASCADE, 
 	FOREIGN KEY (UserId) REFERENCES Users(Id)  ON DELETE CASCADE
 )
 
 INSERT INTO projects
-	VALUES('University website', 'W.Collins'),
+	VALUES('University website', 3, '2023-08-02'),
 	('Task Management', 'G. Peters'),
 	('E-commerce system', 'P. Thompson'),
 	('Expense Tracker', 'L. Jane'),

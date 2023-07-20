@@ -13,12 +13,11 @@ import TrackProgress from '../dashboardComponents/TrackProgress'
 
 function Home1() {
   const [open, setOpen] = useState(false);
-  const [task, setTask] = useState([]);
   const [open2, setOpen2] = useState(false);
+  const [task, setTask] = useState([]);
   const [myTask, setMyTask] = useState({});
   const [myTask2, setMyTask2] = useState({});
   const { user } = useContext(ContextUser);
-
 
   const getData = async () => {
     try {
@@ -64,27 +63,31 @@ function Home1() {
     <div className="tasks">
       <div className="scheduled">
         <div className="title-btn">All Tasks</div>
-        {task &&
-          task.map((item, index) => (
-            <div className="card" key={index}>
-              <h5>Project: {item.ProjectName}</h5>
-              <h5>Project Manager: {item.ProjectManager}</h5>
-              <h5>Task Name: {item.TaskName}</h5>
-              <h5>Start Date: {moment(item.StartDate).utc().format('DD/MM/YYYY')}</h5>
-              <h5>Close Date: {moment(item.CloseDate).utc().format('DD/MM/YYYY')}</h5>
-              <div className="delEdit">
-                <h4 id="delete" onClick={() => handleDelete(item.Id)}>
-                  <AiFillDelete /> Discard
-                </h4>
-                <h4 id="edit" onClick={() => handleEdit(item)}>
-                  <LuClipboardEdit /> Edit
-                </h4>
-              </div>
-
-              {open && <EditTask setOpen={setOpen} item={myTask} />}
+        {
+          task &&
+          task.map((item, index) => {
+   
+          return(
+          <div className="card" key={index}>
+        
+            <h5>Project: {item.ProjectName}</h5>
+            <h5>Project Manager: {item.ProjectManager}</h5>
+            <h5>Task Name: {item.TaskName}</h5>
+            <h5>Start Date: {moment(item.StartDate).utc().format('DD/MM/YYYY')}</h5>
+            <h5>Close Date: {moment(item.CloseDate).utc().format('DD/MM/YYYY')}</h5>
+            <div className="delEdit">
+              <h4 id="delete" onClick={() => handleDelete(item.Id)}>
+                <AiFillDelete /> Discard
+              </h4>
+              <h4 id="edit" onClick={() => handleEdit(item)}>
+                <LuClipboardEdit /> Edit
+              </h4>
             </div>
-          ))
-          }
+            {open && <EditTask setOpen={setOpen} item={myTask} />}
+            </div>)
+            })
+        }
+
       </div>
 
       <div className="progress">

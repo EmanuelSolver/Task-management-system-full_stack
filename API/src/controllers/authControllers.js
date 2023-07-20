@@ -58,7 +58,7 @@ export const login = async(req, res) => {
         } else {
             let token = `JWT ${jwt.sign({ email: user.Email, username: user.UserName, id: user.Id }, `${process.env.JWT_SECRET}`)}`;
             const { id, username, email } = user;
-            return res.json({ id: id, username: user.UserName, email: user.Email, token: token });
+            return res.json({ id: user.Id, username: user.UserName, email: user.Email, token: token });
         }
     }
 }
