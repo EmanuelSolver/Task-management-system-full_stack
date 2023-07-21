@@ -27,14 +27,21 @@ export const createTask = async (req, res) => {
 
 
 export const getTasks = async (req, res) => {
-
+  const { user } = req.params
   const pool = await sql.connect(config.sql); // Establish a connection to the database
 
     try {
 
-      const result = await pool.request().query(
-        "SELECT t.Id, t.TaskName, t.StartDate, t.CloseDate, t.Progress, t.Priority, u.UserName, p.ProjectName FROM Tasks t JOIN Projects p ON t.ProjectId = p.Id JOIN users u ON t.UserId = u.Id "
-      ); // Query the tasks and projects tables
+      const result = await pool.request()
+      .input('user', sql.VarChar, user)
+      .query(
+      `SELECT t.Id, t.TaskName, t.StartDate, t.CloseDate, t.Progress, t.Priority, u.UserName, p.ProjectName, pm.UserName AS ProjectManager
+      FROM Tasks t
+      JOIN Projects p ON t.ProjectId = p.Id
+      JOIN users u ON t.UserId = u.Id
+      JOIN users pm ON p.ManagerId = pm.Id
+      WHERE u.UserName = @user OR pm.UserName = @user`
+        ); // Query the tasks and projects tables
   
       if (result.recordset.length === 0) {
         // Check if the result set is empty
@@ -61,8 +68,8 @@ export const deleteTask = async (req, res) => {
       .input('id', sql.Int, id)
       .query('SELECT * FROM Tasks WHERE Id = @id');
 
-    const user = result.recordset[0];
-    if (user) {
+    const task = result.recordset[0];
+    if (task) {
       await pool
         .request()
         .input('id', sql.VarChar, id)
@@ -142,7 +149,7 @@ export const taskByProject = async(req, res) =>{
   
       if (result.recordset.length === 0) {
         // Check if the result set is empty
-        res.status(404).json({ message: 'Record not found' });
+        res.status(404).json({ message: 'Tasks Not found' });
       } else {
         res.status(200).json(result.recordset); // Return the result
       }

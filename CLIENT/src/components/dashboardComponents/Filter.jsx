@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { ContextUser } from '../../context/userContext/userContext';
 import moment from 'moment';
 // import {toast, ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
 
 function Filter() {     
   const { user } = useContext(ContextUser);
@@ -37,9 +37,8 @@ function Filter() {
 
     }
 
-    //search tasks by project
-    const handleProject = async() =>{
-     
+    //search tasks by project name
+    const handleProject = async() =>{  
       try {
         const res = await axios.post(`${apiDomain}/taskProject/${proj}`,)
         
@@ -91,8 +90,9 @@ function Filter() {
               <option > - select - </option>
               {
                 project && project.map((item, index) => (
-                    <option key={index} value={item.Id}> {item.ProjectName} </option>
-                ))}
+                    <option key={index} value={index + 1}> {item.ProjectName} </option>
+                ))
+              }
           </select>
           <button onClick={handleProject}>Search</button>
 

@@ -21,7 +21,7 @@ function Home1() {
 
   const getData = async () => {
     try {
-      const res = await axios.get(`${apiDomain}/tasks`, {
+      const res = await axios.get(`${apiDomain}/tasks/${user.username}`, {
         headers: { Authorization: `${user.token}` },
       });
       setTask(res.data);
@@ -73,16 +73,22 @@ function Home1() {
             <h5>Project: {item.ProjectName}</h5>
             <h5>Project Manager: {item.ProjectManager}</h5>
             <h5>Task Name: {item.TaskName}</h5>
+            <h5>Assigned To: {item.UserName}</h5>
             <h5>Start Date: {moment(item.StartDate).utc().format('DD/MM/YYYY')}</h5>
             <h5>Close Date: {moment(item.CloseDate).utc().format('DD/MM/YYYY')}</h5>
-            <div className="delEdit">
-              <h4 id="delete" onClick={() => handleDelete(item.Id)}>
-                <AiFillDelete /> Discard
-              </h4>
-              <h4 id="edit" onClick={() => handleEdit(item)}>
-                <LuClipboardEdit /> Edit
-              </h4>
-            </div>
+            
+           { //it is only a project manager who  can edit or delete a task
+           item.ProjectManager == user.username &&
+             <div className="delEdit">
+             <h4 id="delete" onClick={() => handleDelete(item.Id)}>
+               <AiFillDelete /> Discard
+             </h4>
+             <h4 id="edit" onClick={() => handleEdit(item)}>
+               <LuClipboardEdit /> Edit
+             </h4>
+           </div>
+           }
+
             {open && <EditTask setOpen={setOpen} item={myTask} />}
             </div>)
             })

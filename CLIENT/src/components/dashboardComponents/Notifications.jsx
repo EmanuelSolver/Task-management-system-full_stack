@@ -11,7 +11,7 @@ function Notifications() {
   const [task, setTask] = useState([])
 
   const getData = async () => {
-      const res = await axios.get(`${apiDomain}/tasks`,{
+      const res = await axios.get(`${apiDomain}/tasks/${user.username}`,{
         headers: { 'Authorization': `${user.token}` }, 
       })
       setTask(res.data)

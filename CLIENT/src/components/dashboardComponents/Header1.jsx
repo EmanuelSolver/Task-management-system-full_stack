@@ -6,7 +6,7 @@ import { ContextUser} from '../../context/userContext/userContext'
 
 function Header1() {
   const { navigator } = useContext(Context)
-  const { dispatch } = useContext(ContextUser)
+  const { user, dispatch } = useContext(ContextUser)
 
   const handleLogout = () =>{
     //logout dispatch here
@@ -27,7 +27,7 @@ function Header1() {
     <>
     <div className="dashHeader">
       <div className='head'> {capitalized} </div>
-      <div className="logout" onClick={handleLogout}><AiOutlinePoweroff/> Logout</div>
+      <div className="logout" onClick={handleLogout}><AiOutlinePoweroff/>Logout({user.username})</div>
     </div>
     <div className="title">
       <h3>{ title }</h3>

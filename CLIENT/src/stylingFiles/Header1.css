@@ -39,6 +39,8 @@
     justify-content: center;
 }
 .logout{
+    display: flex;
+    align-items: center;
     color: brown;
     position: relative;
     left: -4rem;

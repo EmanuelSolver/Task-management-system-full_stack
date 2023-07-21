@@ -5,8 +5,11 @@ import { getUsers } from '../controllers/userController.js';
 const routes = (app) => {
     //todo routes
     app.route('/tasks')
-        .get(loginRequired, getTasks)
         .post(loginRequired, createTask)
+
+    app.route('/tasks/:user')
+        .get(loginRequired, getTasks)
+
 
     app.route('/tasks/:id')
         .delete(loginRequired, deleteTask)
