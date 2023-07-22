@@ -1,6 +1,7 @@
 .tasks{
     display: flex;
     justify-content: space-around;
+    
 }
 .future, .overdue{
     background-color: #e4e3e3;
@@ -40,4 +41,16 @@
 
 .card #dueDate{
     color: rgb(226, 43, 211);
+}
+
+@media screen and (max-width: 730px) {
+    .tasks{
+       flex-direction: column;
+        height: 80vh;
+        overflow-y: scroll;
+    }
+    .future, .overdue{
+        width: 90%;
+        height: 80vh;
+    }
 }

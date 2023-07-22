@@ -44,7 +44,7 @@ export function SideNav() {
         <div className="logo"><GrDiamond /> TManager </div>
         <div className="sidenav-wrapper">
             <div className="sidenav-item" onClick={handleHome}><ImHome/> Home</div>
-            <div className="sidenav-item" onClick={handleNotifications}><MdOutlineNotificationImportant/> Notifications</div>
+            <div className="sidenav-item" onClick={handleNotifications}><MdOutlineNotificationImportant/> Notification</div>
             <div className="sidenav-item" onClick={handleProjects}><PiProjectorScreenFill /> Projects</div>
             <div className="sidenav-item" onClick={handleFilter}><BsFillFilterSquareFill/> Filter Tasks</div>
             <div className="sidenav-item" onClick={handleAnalytics}><GoGraph/> Analytics</div>

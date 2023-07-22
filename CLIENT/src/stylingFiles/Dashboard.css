@@ -8,3 +8,13 @@
     height: 111vh;
     
 }
+
+@media screen and (max-width: 730px) {
+.dashboard{
+    margin-left: -14%;
+    margin-top: -7%;
+    width: 113vw;
+    height: 111vh;
+
+    }
+}

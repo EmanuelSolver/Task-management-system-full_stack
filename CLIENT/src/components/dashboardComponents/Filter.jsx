@@ -5,8 +5,8 @@ import { useState, useEffect } from 'react'
 import { useContext } from 'react';
 import { ContextUser } from '../../context/userContext/userContext';
 import moment from 'moment';
-// import {toast, ToastContainer} from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Filter() {     
   const { user } = useContext(ContextUser);
@@ -16,7 +16,7 @@ function Filter() {
   const [priority, setPriority] = useState('')
   const [proj, setProj] = useState('')
 
-  //get projects
+  //get all projects
   const getProjects = async () => {
     const res = await axios.get(`${apiDomain}/projects`,{
         headers: { 'Authorization': `${user.token}` },
@@ -25,12 +25,37 @@ function Filter() {
   }
 
     //search tasks by priority
-    const handlePriority = async() =>{
+  const handlePriority = async() =>{
+      
+    try{
+      await axios.post(`${apiDomain}/taskPriority/${priority}`, {user: user.username})
+      .then((response) =>{
+        response.data.message && toast.success(response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
 
-      try {
-        const res = await axios.post(`${apiDomain}/taskPriority/${priority}`,)
-        
-        setPriorityTask(res.data) 
+          setPriorityTask(response.data) 
+      })
+      .catch(({response}) =>{
+
+        toast.error(response.data.error, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+      })
       } catch (error) {
         console.log(error);
       }
@@ -40,9 +65,34 @@ function Filter() {
     //search tasks by project name
     const handleProject = async() =>{  
       try {
-        const res = await axios.post(`${apiDomain}/taskProject/${proj}`,)
-        
-        setProjectTask(res.data)
+        await axios.post(`${apiDomain}/taskProject/${proj}`, {user: user.username})
+        .then((response) =>{
+          response.data.message && toast.success(response.data.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+  
+            setProjectTask(response.data)
+          })
+        .catch(({response}) =>{
+  
+          toast.error(response.data.error, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
+        })
       } catch (error) {
         console.log(error);
       }
@@ -56,10 +106,11 @@ function Filter() {
     }, [])
 
   return (
+    <>
     <div className='filter'>
 
-      <div className="searchTitle">Filter By Priority</div>
       <div className="byPriority">
+        <div className="searchTitle">Filter By Priority</div>
         <select name="" id="" onChange={(e) => setPriority(e.target.value)}>
           <option value="">- select -</option>
           <option value="high">High</option>
@@ -67,11 +118,11 @@ function Filter() {
           <option value="low">Low</option>
         </select>
         <button onClick={handlePriority}>Search</button>
-
+       
         <div className='card-list'>
         {
           priorityTask && priorityTask.map((item, index) => (
-            <div className="card" key={index}>
+            <div className="card1" key={index}>
               <h5>Project: {item.ProjectName}</h5>
               <h5>Project Manager: {item.ProjectManager}</h5>
               <h5>Task Name: {item.TaskName}</h5>
@@ -84,8 +135,9 @@ function Filter() {
        
       </div>
 
-      <div className="searchTitle">Filter By project Name</div>
       <div className="byProject">
+          <div className="searchTitle">Filter By project Name</div>
+
           <select name="" id="" onChange={(e) => setProj(e.target.value)}>
               <option > - select - </option>
               {
@@ -99,7 +151,7 @@ function Filter() {
        <div className="card-list">
        {
           projectTask && projectTask.map((item, index) => (
-               <div className="card" key={index}>
+               <div className="card1" key={index}>
                  <h5>Project: {item.ProjectName}</h5>
                  <h5>Project Manager: {item.ProjectManager}</h5>
                  <h5>Task Name: {item.TaskName}</h5>
@@ -110,8 +162,23 @@ function Filter() {
         }
        </div>
       </div> 
+      
+    
   
     </div>
+    <ToastContainer
+      position="top-center"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+  />
+</>
   )
 }
 

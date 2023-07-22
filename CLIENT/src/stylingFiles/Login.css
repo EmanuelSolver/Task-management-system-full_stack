@@ -12,8 +12,12 @@ input, select, label, p{
     border-radius: 10px;
     margin-left: 25%;
     width: 50%;
-    
+    margin-bottom: 20px;   
 }
+input, select{
+    height: 25px;
+}
+
 label{
     font-weight: 700;
     
@@ -22,11 +26,7 @@ span{
     color: brown;
     margin-left: 25%;
 }
-input, select{
-    /* margin-top: 10px; */
-    margin-bottom: 20px;
-    height: 25px;
-}
+
 h2{
     text-align: center;
    
@@ -54,4 +54,15 @@ h2{
 .float-Btn>h5{
     color: rgb(111, 5, 209);
     cursor: pointer;
+}
+
+@media screen and (max-width: 415px) {
+    .float-Btn, .simple-form{
+        width: 80%;
+        font-size: small;
+        margin-left: 10%;
+    
+    }
+ 
+     
 }

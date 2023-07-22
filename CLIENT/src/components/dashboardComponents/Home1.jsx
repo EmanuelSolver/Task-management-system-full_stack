@@ -23,7 +23,7 @@ function Home1() {
     try {
       const res = await axios.get(`${apiDomain}/tasks/${user.username}`, {
         headers: { Authorization: `${user.token}` },
-      });
+      })
       setTask(res.data);
     } catch (error) {
       console.error('Error fetching data:', error);

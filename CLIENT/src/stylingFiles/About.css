@@ -5,7 +5,25 @@
     gap: 20%;
     margin-top: 1%;
 }
+.about-container #subtitle{
+    color: rgb(50, 5, 155);
+    font-weight: 900;
+} 
 .about{
     width: 45%;
     margin-left: 10%;
 }
+
+@media screen and (max-width: 735px) {
+    .about-container{
+        flex-direction: column;
+    }
+    .about{
+        width: 95%;
+        margin-left: 5%;
+    }
+    .vision-mission{
+        width: 95%;
+        margin-left: 5%;
+    }
+   }

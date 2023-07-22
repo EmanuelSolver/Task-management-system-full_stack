@@ -11,6 +11,7 @@ function Home() {
           <h1 className="heading">Welcome to TManager</h1>
            
             <div className="content">
+               
                 <div className='left'>
                   <h2>Dont be caught up by Deadlines, Manage your Tasks Efficiently with TManager</h2>
                   <h5>Sign up with us and we will be glad to have you on board</h5>
@@ -19,6 +20,7 @@ function Home() {
                 <div className='right'>
                   <img src='/logo.png' alt='logo'/>
                 </div>
+              
             </div> 
 
           <div className="footer">

@@ -36,11 +36,11 @@ export const getTasks = async (req, res) => {
       .input('user', sql.VarChar, user)
       .query(
       `SELECT t.Id, t.TaskName, t.StartDate, t.CloseDate, t.Progress, t.Priority, u.UserName, p.ProjectName, pm.UserName AS ProjectManager
-      FROM Tasks t
-      JOIN Projects p ON t.ProjectId = p.Id
-      JOIN users u ON t.UserId = u.Id
-      JOIN users pm ON p.ManagerId = pm.Id
-      WHERE u.UserName = @user OR pm.UserName = @user`
+        FROM Tasks t
+        JOIN Projects p ON t.ProjectId = p.Id
+        JOIN users u ON t.UserId = u.Id
+        JOIN users pm ON p.ManagerId = pm.Id
+        WHERE u.UserName = @user OR pm.UserName = @user`
         ); // Query the tasks and projects tables
   
       if (result.recordset.length === 0) {
@@ -110,19 +110,26 @@ export const getProjects = async (req, res) => {
 
 export const taskByPriority = async(req, res) =>{
   const { priority } = req.params
+  const { user } = req.body
 
   const pool = await sql.connect(config.sql); // Establish a connection to the database
   
     try {
       const result = await pool.request()
       .input('value', sql.VarChar, priority)
+      .input('user', sql.VarChar, user)
       .query(
-        "SELECT t.Id, t.TaskName, t.StartDate, t.CloseDate, p.ProjectName FROM Tasks t JOIN Projects p ON t.ProjectId = p.Id WHERE Priority = @value"
-      ); // Query the tasks and projects tables
+        `SELECT t.Id, t.TaskName, t.StartDate, t.CloseDate, t.Progress, t.Priority, u.UserName, p.ProjectName, pm.UserName AS ProjectManager
+          FROM Tasks t
+          JOIN Projects p ON t.ProjectId = p.Id
+          JOIN users u ON t.UserId = u.Id
+          JOIN users pm ON p.ManagerId = pm.Id
+          WHERE (u.UserName = @user OR pm.UserName = @user) AND Priority = @value`
+      ); 
   
       if (result.recordset.length === 0) {
         // Check if the result set is empty
-        res.status(404).json({ message: 'Project not found' });
+        res.status(404).json({ message: "Project with  Priority isn't found" });
       } else {
         res.status(200).json(result.recordset); // Return the result
       }
@@ -137,14 +144,20 @@ export const taskByPriority = async(req, res) =>{
 
 export const taskByProject = async(req, res) =>{
   const { proj } = req.params
-
+  const { user } = req.body
   const pool = await sql.connect(config.sql); // Establish a connection to the database
   
     try {
       const result = await pool.request()
       .input('value', sql.Int, proj)
+      .input('user', sql.VarChar, user)
       .query(
-        "SELECT t.Id, t.TaskName, t.StartDate, t.CloseDate, p.ProjectName FROM Tasks t JOIN Projects p ON t.ProjectId = p.Id WHERE ProjectId = @value"
+        `SELECT t.Id, t.TaskName, t.StartDate, t.CloseDate, t.Progress, t.Priority, u.UserName, p.ProjectName, pm.UserName AS ProjectManager
+          FROM Tasks t
+          JOIN Projects p ON t.ProjectId = p.Id
+          JOIN users u ON t.UserId = u.Id
+          JOIN users pm ON p.ManagerId = pm.Id
+          WHERE (u.UserName = @user OR pm.UserName = @user) AND ProjectId = @value`
       ); // Query the tasks and projects tables
   
       if (result.recordset.length === 0) {

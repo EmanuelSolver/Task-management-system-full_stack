@@ -1,7 +1,7 @@
 .sidenav{
     display: flex;
     flex-direction: column;
-    width: 15%; 
+    width: 18%; 
     background-color: #ccc;
 }
 .logo{
@@ -27,3 +27,33 @@
 .sidenav-item:hover{
     background-color: #fff;
 }
+
+@media screen and (max-width: 943px) {
+    .sidenav-item{
+        font-size: small;
+        padding-left: 10px;
+    
+    }
+    .logo{
+    font-weight: 700;
+    font-size: large;
+    margin-left: 2%;
+
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .sidenav{
+        width: 25%;
+    }
+    .sidenav-item{
+        font-size: small;
+        padding-left: 0px;
+    
+    }
+    .logo{
+        font-weight: 700;
+        font-size: small;
+        }
+}
+

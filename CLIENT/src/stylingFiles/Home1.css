@@ -30,7 +30,6 @@
     border-radius: 20px;
     width: 75%;
     color: rgb(0, 0, 12);
-    margin-top: 10px;
     font-family: cursive;
 }
 .card> h5{
@@ -56,4 +55,20 @@
 #done{
     cursor: pointer;
     margin-left: 2.5rem;
+}
+
+@media screen and (max-width: 730px) {
+    .tasks{
+       flex-direction: column;
+        overflow-y: scroll;
+    }
+    .scheduled, .progress, .completed{
+        width: 90%;
+        height: 100vh;
+    }
+    .card{
+        font-size: small;
+    
+
+    }
 }

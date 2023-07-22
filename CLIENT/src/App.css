@@ -1,13 +1,23 @@
 
 body{
-  background: url('../public/logo.png');
+  background: url('../public/background-logo.png');
   background-size: cover;
+  background-repeat: no-repeat;
 }
 .main-output{
-  background: linear-gradient(to right top, rgba(251, 255, 256, 0.649),rgba(21, 5, 243, 0.603));
+  background: linear-gradient(to top right, rgba(255, 255, 243, 0.568),rgba(21, 5, 243, 0.603));
   border-radius: 2rem;
   width: 90%;
+  height: 100vh;
   margin-left: 5%;
-  height: 103vh;
   padding: 20px;
+}
+
+@media screen and (max-width: 520px) {
+ body{
+  background: none;
+ }
+ .main-output{
+  margin-left: 2;
+ }  
 }

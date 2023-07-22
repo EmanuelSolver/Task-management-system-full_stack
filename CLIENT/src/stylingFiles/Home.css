@@ -67,3 +67,29 @@
 .left-description1, .right-description2{
     margin-left: -17rem;
 }
+
+@media screen and (max-width: 663px) {
+    .right{
+        display: none;
+    }
+    .left{
+        width: 80%;
+        margin-left: 0.5%;
+        line-height: 2rem;
+        font-size: small;
+    }
+
+    .footer{
+        /* flex-direction: column; */
+    }
+
+    .left-description1, .right-description2{
+        margin-left: 5px;
+    }
+}
+
+@media screen and (max-width: 1069px) {
+    .left-description1, .right-description2{
+        margin-left: 0px;
+    }
+}
