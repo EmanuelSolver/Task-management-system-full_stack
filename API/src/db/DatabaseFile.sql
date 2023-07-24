@@ -27,7 +27,7 @@ CREATE TABLE Tasks(
     Priority VARCHAR (50) NOT NULL, 
     Progress INT NOT NULL,
     PRIMARY KEY(Id),
-    FOREIGN KEY (ProjectId) REFERENCES Projects(Id)  ON DELETE CASCADE, 
+    FOREIGN KEY (ProjectId) REFERENCES Projects(Id), 
 	FOREIGN KEY (UserId) REFERENCES Users(Id)  ON DELETE CASCADE
 )
 
