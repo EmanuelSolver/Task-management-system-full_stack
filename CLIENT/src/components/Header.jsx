@@ -1,17 +1,13 @@
 import { Link } from 'react-router-dom'
 import '../stylingFiles/Header.css'
-import { useContext } from 'react'
-import { ContextUser } from '../context/userContext/userContext'
-//icons
 import { GrDiamond } from "react-icons/gr";
 
 function Header() {
-  const { user } = useContext(ContextUser)
+  // const { user } = useContext(ContextUser)
 
   return (
     <div>
       {
-        !user &&(
             <nav className='navbar'>
               
               <div className='navbar-container'>
@@ -29,8 +25,7 @@ function Header() {
                     
               </div>      
                 
-            </nav>
-          ) 
+            </nav>    
 
       }         
       

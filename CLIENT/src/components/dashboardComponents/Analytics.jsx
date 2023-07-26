@@ -3,7 +3,7 @@ import { apiDomain } from '../../utils/utils';
 import axios from 'axios';
 import { ContextUser } from '../../context/userContext/userContext';
 import { useContext, useState, useEffect, useRef } from 'react';
-import Chart from 'chart.js/auto';
+import  Chart  from 'chart.js/auto';
 import moment from 'moment';
 
 const Analytics = () => {
@@ -11,8 +11,6 @@ const Analytics = () => {
   const chartInstanceRef = useRef(null);
   const { user } = useContext(ContextUser);
   const [task, setTask] = useState([]);
-  const progress = []; // Array to store progress values
-  const labels = []; // Array to store task names
 
   const getData = async () => {
     try {
@@ -26,7 +24,11 @@ const Analytics = () => {
   };
   
   useEffect(() => {
+    
     getData();
+  }, []); // Empty dependency array to fetch data only on initial component mount
+
+  useEffect(() => {
     const ctx = chartRef.current.getContext('2d');
 
     if (chartInstanceRef.current) {
@@ -34,7 +36,9 @@ const Analytics = () => {
     }
 
     // Populate the 'progress' and 'labels' arrays
-    task.forEach((item) => {
+    const progress = [];
+    const labels = [];
+    task?.forEach((item) => {
       if (
         moment(item.StartDate).isSameOrBefore(moment(), 'day') &&
         item.Progress < 100 &&
@@ -88,7 +92,7 @@ const Analytics = () => {
         chartInstanceRef.current.destroy();
       }
     };
-  }, [user.token]); // Add 'user.token' as a dependency to re-render the chart when the token changes
+  }, [task]); // Add 'task' as a dependency to re-render the chart when the task data changes
 
   return (
     <>
@@ -100,4 +104,3 @@ const Analytics = () => {
 };
 
 export default Analytics;
-

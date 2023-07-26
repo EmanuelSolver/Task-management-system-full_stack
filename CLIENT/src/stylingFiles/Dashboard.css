@@ -4,17 +4,92 @@
     z-index: 1;
     background-color: white;
     margin-left: -10%;
-    margin-top: -3%;
+    margin-top: -7%;
     height: 111vh;
     
 }
 
-@media screen and (max-width: 730px) {
+@media screen and (max-width: 1265px) {
 .dashboard{
     margin-left: -14%;
-    margin-top: -7%;
+    margin-top: -9%;
     width: 113vw;
     height: 111vh;
 
     }
+}
+
+@media screen and (max-width: 980px) {
+    .dashboard{
+        margin-left: -12%;
+        margin-top: -11%;
+        width: 113vw;
+        height: 111vh;
+    
+        }
+}
+@media screen and (max-width: 870px) {
+    .dashboard{
+        margin-left: -12%;
+        margin-top: -12.5%;
+        width: 113vw;
+        height: 111vh;
+    
+        }
+}
+@media screen and (max-width: 730px) {
+    .dashboard{
+        margin-left: -12%;
+        margin-top: -14%;
+        width: 113vw;
+        height: 111vh;
+    
+        }
+}
+@media screen and (max-width: 646px) {
+    .dashboard{
+        margin-left: -12%;
+        margin-top: -18%;
+        width: 113vw;
+        height: 111vh;
+    
+        }
+}
+@media screen and (max-width: 615px) {
+    .dashboard{
+        margin-left: -12%;
+        margin-top: -20%;
+        width: 113vw;
+        height: 116vh;
+    
+        }
+}
+
+@media screen and (max-width: 531px) {
+    .dashboard{
+        margin-left: -12%;
+        margin-top: -23%;
+        width: 113vw;
+        height: 116vh;
+    
+        }
+}
+@media screen and (max-width: 470px) {
+    .dashboard{
+        margin-left: -14%;
+        margin-top: -26%;
+        width: 113vw;
+        height: 116vh;
+    
+        }
+}
+
+@media screen and (max-width: 297px) {
+    .dashboard{
+        margin-left: -16%;
+        margin-top: -30%;
+        width: 113vw;
+        height: 116vh;
+    
+        }
 }
